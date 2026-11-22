@@ -294,8 +294,7 @@ function vSet(){
   return '<div class="ttl"><span></span><h1>설정</h1><span></span></div>'
    +'<button class="card prof" data-act="sub" data-v="profile"><span class="ft" style="--c:var(--c0)">'+face(0,40)+'</span><span>'+(nick?'<b class="nick">'+esc(nick)+'</b>님, ':"")+'오늘도 좋은 하루 되세요!</span><span class="chev">›</span></button>'
    +'<div class="card rows">'+row("user","로그인 · 서버 동기화",user?"로그인됨":"","account")+row("cloud","데이터 백업하기","","backup")+row("cal","통계 기간 설정",STATL[DB.statDef||"m"],"period")+row("moon","테마 설정",THEMEL[DB.theme||"system"],"theme")+'</div>'
-   +'<div class="card rows">'+row("info","앱 정보","","about")+'</div>'
-   +'<div class="card"><h3>저장 공간</h3><p style="margin:0 0 10px;color:var(--sub);font-size:.88rem">화면을 새로 불러옵니다. 저장된 기분 기록과 설정은 유지돼요.</p><button class="chip" style="color:#E5384F;font-weight:700" data-act="clearcache">캐시 지우기</button></div>';
+   +'<div class="card rows">'+row("info","앱 정보","","about")+'</div>';
 }
 function vSub(){
   const hd=t=>'<div class="ttl"><button class="arrow" data-act="subback" aria-label="뒤로">'+ico("back")+'</button><h1>'+t+'</h1><span></span></div>';
@@ -364,13 +363,6 @@ document.addEventListener("click",ev=>{
   else if(a==="filter"){S.f=Number(v);render()}
   else if(a==="search"){S.search=!S.search;if(!S.search)S.q="";render();if(S.search&&$("q"))$("q").focus()}
   else if(a==="sub"){S.sub=v;render();window.scrollTo(0,0)}
-  else if(a==="clearcache"){
-    if(confirm("이 기기에 저장된 기분 기록과 설정을 모두 삭제할까요?\n로그인된 서버 기록은 삭제되지 않아요.")){
-      localStorage.removeItem(K2);
-      DB={entries:{},tags:[]};
-      S.sub=null;S.tab="set";render();toast("이 기기의 저장 데이터를 지웠어요");
-    }
-  }
   else if(a==="subback"){S.sub=null;render()}
   else if(a==="setstat"){DB.statDef=v;S.stat=v;save();render()}
   else if(a==="settheme"){DB.theme=v;applyTheme();save();render()}
