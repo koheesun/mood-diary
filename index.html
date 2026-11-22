@@ -316,7 +316,7 @@ document.addEventListener("change",ev=>{
   r.readAsDataURL(ev.target.files[0]);
 });
 /* Firebase 연결 값을 아래 FB 안에 넣으면 서버 동기화가 켜져요 */
-const FB={apiKey:"",authDomain:"",projectId:"",appId:""};
+const FB={apiKey:"AIzaSyAadAZEGcln9trzwXsWOS95TYLM0dzIQD4",authDomain:"mood-diary-3dde0.firebaseapp.com",projectId:"mood-diary-3dde0",appId:"1:660598871861:web:4942a572f6aab3f31f9e7c"};
 let fb=null,user=null,auth=null,db=null;
 try{if(FB.apiKey&&window.firebase){firebase.initializeApp(FB);auth=firebase.auth();db=firebase.firestore();fb=true}}catch(e){}
 const col=()=>db.collection("users").doc(user.uid).collection("entries");
