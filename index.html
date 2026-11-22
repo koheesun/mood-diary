@@ -11,7 +11,7 @@
 <style>
 :root{
   --bg:#FBFAFF;--card:#FFFFFF;--ink:#27243C;--sub:#908DA8;--line:#EFEDF8;--soft:#F1EFFC;--pri:#7C6CE2;
-  --c0:#FFCB47;--c1:#9CD89F;--c2:#E0DFE6;--c3:#8CB8F6;--c4:#FF8C97;--eye:#3E3A4F;--sh:0 4px 18px rgba(124,108,226,.09);
+  --c0:#FFC94F;--c1:#9DDBB8;--c2:#DCD8E8;--c3:#91AEEB;--c4:#FF8D9E;--eye:#3E3A4F;--sh:0 4px 18px rgba(124,108,226,.09);
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1A1830;--card:#26233F;--ink:#EEEBFF;--sub:#A5A1C8;--line:#38345A;--soft:#322F55;--pri:#9082F0;--sh:0 4px 18px rgba(0,0,0,.25)}}
@@ -155,8 +155,8 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 <div class="ov dt" id="det" hidden></div>
 
 <script>
-const L=["행복해요","보통이에요","그저 그래요","우울해요","힘들어요"];
-const CH=["행복","보통","그저그래","우울","힘듦"];
+const L=["행복해요","괜찮아요","보통이에요","힘들어요","화나요"];
+const CH=["행복","괜찮음","보통","힘듦","화남"];
 const DOW=["일","월","화","수","목","금","토"];
 const BASE=["일상","일","운동","맛있는거"];
 const STATL={m:"이번 달",y:"올해",a:"전체 기간"},THEMEL={system:"시스템 설정",light:"라이트 모드",dark:"다크 모드"};
@@ -192,15 +192,20 @@ const ico=n=>'<svg class="i" viewBox="0 0 24 24" aria-hidden="true">'+P[n]+'</sv
 
 function face(i,s){
   const st='fill="none" stroke="var(--eye)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"';
-  const dot=(x,y)=>'<circle cx="'+x+'" cy="'+y+'" r="4.5" fill="var(--eye)"/>';
-  const heart=x=>'<path transform="translate('+x+' 46) scale(1.25)" fill="#E5384F" d="M0 5C-9-3-9-10-4-10c2 0 3.5 1 4 3 .5-2 2-3 4-3 5 0 5 7-4 15z"/>';
-  const blush='<ellipse cx="22" cy="60" rx="7" ry="4.5" fill="#FF7E8B" opacity=".45"/><ellipse cx="78" cy="60" rx="7" ry="4.5" fill="#FF7E8B" opacity=".45"/>';
+  const dot=(x,y)=>'<circle cx="'+x+'" cy="'+y+'" r="4.3" fill="var(--eye)"/>';
+  const blush='<ellipse cx="22" cy="61" rx="8" ry="5" fill="#FF7E8B" opacity=".48"/><ellipse cx="78" cy="61" rx="8" ry="5" fill="#FF7E8B" opacity=".48"/>';
+  const cloud='<g fill="var(--c3)" opacity=".52"><circle cx="26" cy="61" r="15"/><circle cx="39" cy="45" r="19"/><circle cx="60" cy="47" r="18"/><circle cx="76" cy="61" r="14"/><ellipse cx="50" cy="67" rx="34" ry="20"/></g>';
   const f=[
-    blush+'<path d="M28 47Q35 39 42 47M58 47Q65 39 72 47" '+st+'/><path d="M35 59Q50 77 65 59Z" fill="var(--eye)" stroke="var(--eye)" stroke-width="3" stroke-linejoin="round"/>',
-    dot(35,47)+dot(65,47)+'<path d="M40 62Q50 70 60 62" '+st+'/>',
-    dot(35,47)+dot(65,47)+'<path d="M41 65H59" '+st+'/>',
-    dot(35,49)+dot(65,49)+'<path d="M27 40Q33 37 41 42M73 40Q67 37 59 42" '+st+' stroke-width="3.5"/><path d="M39 70Q50 60 61 70" '+st+'/>',
-    blush+heart(34)+heart(66)+'<path d="M41 64Q50 72 59 64" '+st+'/>'
+    // 행복해요: 눈웃음, 활짝 웃는 입, 햇살 포인트
+    blush+'<path d="M27 46Q34 36 42 46M58 46Q66 36 73 46" '+st+'/><path d="M35 58Q50 77 65 58Q64 72 50 73Q37 71 35 58Z" fill="var(--eye)"/><g stroke="#FFC94F" stroke-width="5" stroke-linecap="round"><path d="M17 19l-3-7M28 12l-1-8M39 17l4-7"/></g>',
+    // 괜찮아요: 편안하게 감은 눈, 작은 미소, 잎사귀
+    '<path d="M29 49Q36 56 43 49M57 49Q64 56 71 49" '+st+'/><path d="M41 63Q50 69 59 63" '+st+'/><g fill="#70B98D"><path d="M48 23Q35 5 27 13Q28 27 48 27Z"/><path d="M51 23Q58 5 72 12Q70 25 51 27Z"/></g><path d="M50 19v13" stroke="#70B98D" stroke-width="3" stroke-linecap="round"/>',
+    // 보통이에요: 무표정, 흐릿한 둥근 구름 장식
+    '<g fill="var(--c2)" opacity=".5"><circle cx="28" cy="65" r="15"/><circle cx="39" cy="49" r="19"/><circle cx="61" cy="50" r="18"/><circle cx="75" cy="65" r="14"/></g>'+dot(36,51)+dot(64,51)+'<path d="M42 67H58" '+st+'/>',
+    // 힘들어요: 구름 캐릭터, 처진 눈썹/입, 어지러운 스파이럴
+    cloud+'<path d="M31 49Q37 45 43 48M57 48Q63 45 69 49" '+st+' stroke-width="3.8"/><path d="M35 54Q39 59 43 54M57 54Q61 59 65 54" '+st+' stroke-width="3.5"/><path d="M40 72Q50 64 60 72" '+st+'/><g fill="#E7E2FF" stroke="#9181D7" stroke-width="2.5"><path d="M73 17c12-7 18 2 10 8-8 6-15-1-10-5 4-3 9 1 6 4" fill="none" stroke-linecap="round"/></g>'+blush,
+    // 화나요: 찡그린 눈썹, 화난 입, 분노 표시
+    blush+'<path d="M28 42L42 49M58 49L72 42" '+st+' stroke-width="5.5"/><path d="M35 54Q39 58 43 54M57 54Q61 58 65 54" '+st+'/><path d="M39 72Q50 60 61 72" '+st+'/><g stroke="#E94F61" stroke-width="5" stroke-linecap="round"><path d="M79 19l8-7M82 28l11 1M75 10l1-8"/></g>'
   ][i];
   return '<svg viewBox="0 0 100 100" width="'+s+'" height="'+s+'" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="var(--c'+i+')"/>'+f+'</svg>';
 }
