@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>오늘의 기분</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -158,9 +158,9 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .pgr .it img{width:100%;height:100%;object-fit:cover;display:block}
 .pgr .x{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;font-size:1rem;line-height:1}
 .pgr .add{aspect-ratio:1;border:2px dashed #CFC8F3;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--sub);background:var(--soft);cursor:pointer;text-align:center;font-size:.8rem}
-.lb{position:fixed;inset:0;z-index:30;background:rgba(10,8,20,.94);overflow:auto;-webkit-overflow-scrolling:touch}
-.lbi{width:max-content;min-width:100%;min-height:100%;display:grid;place-items:center}
-.lbi img{display:block;max-width:none;max-height:none}
+.lb{position:fixed;inset:0;z-index:30;background:rgba(10,8,20,.94);overflow:hidden}
+.lbi{position:absolute;inset:0;display:grid;place-items:center}
+.lbi img{display:block;width:100%;height:100%;object-fit:contain}
 .lbx{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:31;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.9);color:#27243C;font-size:1.1rem;text-align:center}
 .lbn{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:31;background:rgba(0,0,0,.6);color:#fff;font-size:.78rem;padding:4px 14px;border-radius:14px;white-space:nowrap}
 @media (hover:hover){.chips{scrollbar-width:thin;cursor:grab}.chips.drag{cursor:grabbing;user-select:none}}
@@ -172,13 +172,8 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 @keyframes swr{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
 .hap>svg{animation:bob 3.2s ease-in-out infinite;transform-origin:50% 70%}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-5px) rotate(4deg)}}
-.tin>*{animation:tup .32s ease-out both}
-.tin>*:nth-child(2){animation-delay:.04s}.tin>*:nth-child(3){animation-delay:.08s}.tin>*:nth-child(4){animation-delay:.12s}.tin>*:nth-child(n+5){animation-delay:.16s}
-@keyframes tup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .day,.chip,.btn,.li,.sum,.fab,.row,.pk,.arrow,.ic,.tabs button{transition:transform .12s ease,background-color .15s ease}
 .day:active,.chip:active,.btn:active,.li:active,.sum:active,.fab:active,.row:active,.pk:active,.arrow:active,.ic:active,.tabs button:active{transform:scale(.95)}
-.ov:not([hidden]){animation:ovin .26s ease-out}
-@keyframes ovin{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .lb:not([hidden]){animation:fin .2s ease-out}
 @keyframes fin{from{opacity:0}to{opacity:1}}
 .toast{animation:fin .2s ease-out}
@@ -192,6 +187,15 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .panel{flex:0 0 100%;min-width:0;padding:8px 18px 20px}
 .fab{display:grid;place-items:center;padding:0}
 .fab svg.i{width:26px;height:26px;stroke-width:2}
+#note,.sheet .note,.li p,.sum p{font-family:"Gaegu","Nanum Pen Script","Noto Sans KR",cursive}
+#note{font-size:1.2rem;line-height:1.5}
+.sheet .note{font-size:1.25rem;line-height:1.55}
+.li p,.sum p{font-size:1rem}
+.chipw{display:inline-flex;align-items:stretch}
+.chipw .chip{border-radius:18px 0 0 18px;padding-right:8px}
+.cx{background:var(--soft);color:var(--sub);padding:0 12px 0 2px;border-radius:0 18px 18px 0;font-size:1.05rem;line-height:1}
+.chipw .chip.on{box-shadow:inset 2px 0 0 var(--pri),inset 0 2px 0 var(--pri),inset 0 -2px 0 var(--pri)}
+.chipw .chip.on+.cx{box-shadow:inset -2px 0 0 var(--pri),inset 0 2px 0 var(--pri),inset 0 -2px 0 var(--pri);color:var(--pri)}
 </style>
 </head>
 <body>
@@ -233,7 +237,7 @@ const wd=k=>{const[y,m,d]=parse(k);return DOW[new Date(y,m-1,d).getDay()]};
 const sdate=k=>{const[,m,d]=parse(k);return m+"월 "+d+"일 ("+wd(k)+")"};
 const ldate=k=>parse(k)[0]+"년 "+sdate(k);
 const ent=k=>DB.entries[k]&&typeof DB.entries[k].m==="number"?DB.entries[k]:null;
-function allTags(){const s=[];BASE.concat(DB.tags).forEach(t=>{if(!s.includes(t))s.push(t)});Object.keys(DB.entries).forEach(k=>((DB.entries[k]&&DB.entries[k].tags)||[]).forEach(t=>{if(!s.includes(t))s.push(t)}));return s}
+function allTags(){const s=[];BASE.concat(DB.tags).forEach(t=>{if(!s.includes(t))s.push(t)});Object.keys(DB.entries).forEach(k=>((DB.entries[k]&&DB.entries[k].tags)||[]).forEach(t=>{if(!s.includes(t))s.push(t)}));return s.filter(t=>BASE.includes(t)||!(DB.hid||[]).includes(t))}
 const P={cal:'<rect x="3" y="5" width="18" height="16" rx="4"/><path d="M3 10h18M8 3v4M16 3v4"/>',bar:'<path d="M5 20v-7M12 20V5M19 20v-10"/>',list:'<path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/>',gear:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8.5 14c1 1.6 2.2 2.3 3.5 2.3s2.5-.7 3.5-2.3M9 9.5h.01M15 9.5h.01"/>',back:'<path d="M15 5l-7 7 7 7"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/>',more:'<path d="M5 12h.01M12 12h.01M19 12h.01" stroke-width="3"/>',cloud:'<path d="M7 18a4 4 0 010-8 5.5 5.5 0 0110.5 1.5A3.3 3.3 0 0117 18z"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',moon:'<path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>'};
 const ico=n=>'<svg class="i" viewBox="0 0 24 24" aria-hidden="true">'+P[n]+'</svg>';
 
@@ -277,7 +281,7 @@ function vCal(){
   const e=ent(S.sel);
   const sum=e?'<button class="sum" data-act="open" data-k="'+S.sel+'">'+face(e.m,54)+'<div><small>'+sdate(S.sel)+'</small><b>'+L[e.m]+'!</b>'+(e.n?'<p>'+esc(e.n)+'</p>':"")+'</div><span class="chev">›</span></button>'
     :'<button class="sum" data-act="edit" data-k="'+S.sel+'"><div><small>'+sdate(S.sel)+'</small><b>아직 기록이 없어요</b><p>눌러서 오늘의 기분을 남겨보세요</p></div><span class="chev">›</span></button>';
-  const nk=DB.nick?'<span class="nick">'+esc(DB.nick)+'</span>님, 오늘도,':"오늘도,";
+  const nk=DB.nick?'<span class="nick">'+esc(DB.nick)+'</span>님 오늘은':"오늘은";
   return '<div class="hd"><h1>'+nk+'<br>어떤 하루였나요?</h1><button class="ic" data-act="tab" data-v="set" aria-label="설정">'+ico("smile")+'</button></div>'
    +'<div class="mpill">'+arr(-1)+'<b>'+S.y+'년 '+(S.m+1)+'월</b>'+arr(1,atNow())+'</div><div class="cal">'+g+'</div>'+sum
    +'<button class="fab" data-act="edit" data-k="'+(S.sel<=TODAY?S.sel:TODAY)+'" aria-label="기록하기">'+ico("edit")+'</button>';
@@ -289,14 +293,36 @@ function periodKeys(){
   if(S.stat==="y")return ks.filter(k=>k.startsWith(S.y+"-"));
   return ks;
 }
-function trend(ks){
+function trendPts(ks){
   const g={};
   ks.forEach(k=>{const x=S.stat==="m"?k:k.slice(0,7);(g[x]=g[x]||[]).push(4-DB.entries[k].m)});
-  const xs=Object.keys(g).sort(),pts=xs.map(x=>g[x].reduce((a,b)=>a+b,0)/g[x].length);
-  if(pts.length<2)return "";
-  const W=150,H=70,X=i=>i/(pts.length-1)*W,Y=v=>H-8-v/4*(H-16);
+  return Object.keys(g).sort().map(x=>g[x].reduce((a,b)=>a+b,0)/g[x].length);
+}
+function trendD(pts,k){
+  const W=150,H=70,X=i=>i/(pts.length-1)*W,Y=v=>{const r=H-8-v/4*(H-16),f=H/2;return f+(r-f)*k};
   const line=pts.map((v,i)=>(i?"L":"M")+X(i).toFixed(1)+" "+Y(v).toFixed(1)).join("");
-  return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7C6CE2" stop-opacity=".3"/><stop offset="1" stop-color="#7C6CE2" stop-opacity="0"/></linearGradient></defs><path d="'+line+'L'+W+' '+H+'L0 '+H+'Z" fill="url(#ar)"/><path d="'+line+'" fill="none" stroke="#7C6CE2" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
+  return {line:line,area:line+"L"+W+" "+H+"L0 "+H+"Z"};
+}
+function trend(ks,fresh,mode){
+  const pts=trendPts(ks);if(pts.length<2)return "";
+  const d=trendD(pts,fresh?0:1);
+  return '<svg class="tr" data-m="'+mode+'" data-p="'+pts.join(",")+'" viewBox="0 0 150 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7C6CE2" stop-opacity=".3"/><stop offset="1" stop-color="#7C6CE2" stop-opacity="0"/></linearGradient></defs><path class="ta" d="'+d.area+'" fill="url(#ar)"/><path class="tl" d="'+d.line+'" fill="none" stroke="#7C6CE2" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
+}
+const played={};
+function playPanel(mode){
+  if(S.tab!=="stat"||played[mode])return;
+  const pv=document.querySelector('.pv[data-m="'+mode+'"]'),tr=document.querySelector('svg.tr[data-m="'+mode+'"]');
+  if(!pv&&!tr)return;
+  played[mode]=true;
+  const target=pv?Number(pv.dataset.v):0,pts=tr?tr.dataset.p.split(",").map(Number):null;
+  const draw=e=>{
+    if(pv)pv.textContent=Math.round(target*e);
+    if(tr){const d=trendD(pts,e);tr.querySelector(".tl").setAttribute("d",d.line);tr.querySelector(".ta").setAttribute("d",d.area)}
+  };
+  if(!window.requestAnimationFrame||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){draw(1);return}
+  const t0=performance.now(),D=1100;
+  const step=t=>{const q=Math.min(1,(t-t0)/D),e=1-Math.pow(1-q,3);draw(e);if(q<1)requestAnimationFrame(step)};
+  requestAnimationFrame(step);
 }
 /* 모션: 통계 스와이프 / 도넛 차트 첫 진입 애니메이션 / 탭 전환 / 기록 칩 마우스 스크롤 */
 let donutPlayed=false;
@@ -312,13 +338,13 @@ function animDonut(){
   const step=t=>{const p=Math.min(1,(t-t0)/D),e=1-Math.pow(1-p,3);el.style.background="conic-gradient("+seg(360*e)+")";if(p<1)requestAnimationFrame(step);else done()};
   requestAnimationFrame(step);
 }
-function tabIn(){const s=$("screen");s.classList.remove("tin");void s.offsetWidth;s.classList.add("tin")}
 const PM=["m","y","a"];
 function pgSet(idx,anim){
   const tr=document.querySelector(".track"),ui=document.querySelector(".ui"),tf=anim?"transform .42s cubic-bezier(.22,.8,.3,1)":"none";
   if(tr){tr.style.transition=tf;tr.style.transform="translate3d("+(-idx*100)+"%,0,0)"}
   if(ui){ui.style.transition=tf;ui.style.transform="translateX("+(idx*100)+"%)"}
   document.querySelectorAll(".utab button").forEach((b,i)=>b.classList.toggle("on",i===idx));
+  if(anim)setTimeout(()=>playPanel(PM[idx]),120);
 }
 let pg=null;
 document.addEventListener("pointerdown",ev=>{
@@ -365,6 +391,7 @@ document.addEventListener("wheel",ev=>{
 function statPanel(mode,act){
   const keep=S.stat;S.stat=mode;try{
   const ks=periodKeys(),tot=ks.length,c=[0,0,0,0,0];
+    const fresh=tot>0&&!played[mode];
   ks.forEach(k=>c[DB.entries[k].m]++);
   const pct=tot?Math.round((c[0]+c[1])/tot*100):0,best=tot?c.indexOf(Math.max.apply(null,c)):-1;
   let acc=0;const sg=tot?c.map((v,i)=>{const a=acc/tot*360;acc+=v;return"var(--c"+i+") "+a+"deg "+(acc/tot*360)+"deg"}).join(","):"var(--soft) 0 360deg";
@@ -374,7 +401,7 @@ function statPanel(mode,act){
   const bub=["행복한 날이 많았네요!","차분한 날이 많았어요","담담한 날이 많았어요","조금 우울한 날이 많았어요. 토닥토닥","힘든 날이 많았어요. 수고했어요"];
   return ''
    +'<div class="card"><div class="top1"><h3>'+title+'</h3>'+(S.stat!=="a"?'<span>'+arr(-1)+arr(1,atNow())+'</span>':"")+'</div><div class="hap">'+face(tot?(pct>=60?0:pct>=40?1:2):2,68)
-   +'<div><div class="big">'+pct+'<span style="font-size:1rem">%</span></div><small>'+(tot?(pct>=50?"기분 좋은 날이 많았어요!":"조금 힘든 날이 많았어요"):"아직 기록이 없어요")+'</small></div><div class="sp">'+trend(ks)+'</div></div></div>'
+   +'<div><div class="big"><span class="pv" data-m="'+mode+'" data-v="'+pct+'">'+(fresh?0:pct)+'</span><span style="font-size:1rem">%</span></div><small>'+(tot?(pct>=50?"기분 좋은 날이 많았어요!":"조금 힘든 날이 많았어요"):"아직 기록이 없어요")+'</small></div><div class="sp">'+trend(ks,fresh,mode)+'</div></div></div>'
    +'<div class="card"><h3>기분별 비율</h3><div class="dist"><div class="donut" data-m="'+mode+'" data-c="'+c.join(",")+'" style="background:'+(tot&&!donutPlayed&&mode===act?"var(--soft)":"conic-gradient("+sg+")")+'"></div><div class="lg">'+lg+'</div></div></div>'
    +'<div class="card"><h3>가장 많이 느낀 기분</h3>'+(best>=0?'<div class="best">'+face(best,58)+'<div><b>'+L[best]+'</b><small>총 '+c[best]+'일 ('+Math.round(c[best]/tot*100)+'%)</small></div><div class="bub">'+bub[best]+'</div></div>':'<p class="hint" style="margin:0">기록이 쌓이면 여기에 보여요.</p>')+'</div>';}finally{S.stat=keep}
 }
@@ -433,7 +460,7 @@ function vSub(){
 function render(){
   $("screen").innerHTML=S.tab==="cal"?vCal():S.tab==="stat"?vStat():S.tab==="list"?vList():vSet();
   $("tabin").innerHTML=[["cal","달력","cal"],["stat","통계","bar"],["list","기록","list"],["set","설정","gear"]].map(a=>'<button class="'+(S.tab===a[0]?"on":"")+'" data-act="tab" data-v="'+a[0]+'">'+ico(a[2])+a[1]+'</button>').join("");
-  $("screen").classList.toggle("sw",S.tab==="stat");if(S.tab==="stat")pgSet(PM.indexOf(S.stat),false);animDonut();
+  $("screen").classList.toggle("sw",S.tab==="stat");if(S.tab==="stat")pgSet(PM.indexOf(S.stat),false);animDonut();if(S.tab==="stat")playPanel(S.stat);
 }
 
 /* 사진: 원본 파일 그대로 IndexedDB에 저장 (o:ID = 원본, t:ID = 목록용 작은 미리보기) */
@@ -458,6 +485,19 @@ async function mkThumb(f){
     return await new Promise(r=>c.toBlob(r,"image/jpeg",.8));
   }catch(e){return null}
 }
+async function mkOpt(f){
+  try{
+    const u=URL.createObjectURL(f);
+    const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=u});
+    const m0=Math.max(im.naturalWidth,im.naturalHeight);
+    if(m0<=2560&&f.size<=1500000){URL.revokeObjectURL(u);return f}
+    const sc=Math.min(1,2560/m0),c=document.createElement("canvas");
+    c.width=Math.max(1,Math.round(im.naturalWidth*sc));c.height=Math.max(1,Math.round(im.naturalHeight*sc));
+    const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+    const b=await new Promise(r=>c.toBlob(r,"image/jpeg",.88));
+    return b&&b.size<f.size?b:f;
+  }catch(e){return f}
+}
 async function hyd(){
   const ims=document.querySelectorAll("img[data-p]");
   for(const im of ims){
@@ -476,7 +516,7 @@ async function saveRec(){
   const d=S.draft,ids=[];
   try{
     for(const p of d.photos){
-      if(p.file){await pPut("o:"+p.id,p.file);const t=await mkThumb(p.file);if(t)await pPut("t:"+p.id,t)}
+      if(p.file){await pPut("o:"+p.id,await mkOpt(p.file));const t=await mkThumb(p.file);if(t)await pPut("t:"+p.id,t)}
       ids.push(p.id);
     }
   }catch(e){saving=false;toast("사진을 저장하지 못했어요. 저장 공간을 확인해 주세요");return}
@@ -489,22 +529,19 @@ async function saveRec(){
 async function openLb(i){
   const e=ent(S.det);if(!e)return;const p=plist(e)[i];if(!p)return;
   const src=p.l||await pUrl("o:"+p.id);
-  if(!src){toast("원본 사진이 이 기기에 없어요 (다른 기기에서 올린 사진이에요)");return}
+  if(!src){toast("사진이 이 기기에 없어요 (다른 기기에서 올린 사진이에요)");return}
   const lb=$("lb");lb.hidden=false;
-  lb.innerHTML='<button class="lbx" data-act="lbclose" aria-label="닫기">✕</button><div class="lbi"><img id="lbimg" src="'+src+'" alt="원본 사진"></div><div class="lbn" id="lbn"></div>';
-  const im=$("lbimg"),info=()=>{$("lbn").textContent="원본 크기 "+im.naturalWidth+" × "+im.naturalHeight+"px"};
-  if(im.complete)info();else im.onload=info;
-  lb.scrollTop=0;lb.scrollLeft=0;
+  lb.innerHTML='<button class="lbx" data-act="lbclose" aria-label="닫기">✕</button><div class="lbi"><img src="'+src+'" alt="사진"></div>';
 }
 function closeLb(){$("lb").hidden=true;$("lb").innerHTML=""}
-document.addEventListener("click",ev=>{if(ev.target.classList&&ev.target.classList.contains("lbi"))closeLb()});
+document.addEventListener("click",ev=>{if(ev.target.closest&&ev.target.closest("#lb"))closeLb()});
 document.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!$("lb").hidden)closeLb()});
 document.addEventListener("scroll",ev=>{const t=ev.target;if(t&&t.id==="hs"){const i=Math.round(t.scrollLeft/t.clientWidth),c=$("hc");if(c)c.textContent=(i+1)+" / "+t.children.length}},true);
 
 function vRec(){
   const d=S.draft;
   const picks=L.map((t,i)=>'<button class="pk'+(d.m===i?" on":"")+'" data-act="mood" data-i="'+i+'" aria-pressed="'+(d.m===i)+'">'+tile(i,40)+'<small>'+t+'</small></button>').join("");
-  const chips=allTags().map(t=>'<button class="chip'+(d.tags.includes(t)?" on":"")+'" data-act="tag" data-t="'+esc(t)+'">#'+esc(t)+'</button>').join("")
+  const chips=allTags().map(t=>{const bt='<button class="chip'+(d.tags.includes(t)?" on":"")+'" data-act="tag" data-t="'+esc(t)+'">#'+esc(t)+'</button>';return BASE.includes(t)?bt:'<span class="chipw">'+bt+'<button class="cx" data-act="deltag" data-t="'+esc(t)+'" aria-label="#'+esc(t)+' 태그 삭제">×</button></span>'}).join("")
     +(S.adding?'<input class="ip" id="newtag" maxlength="8" placeholder="태그 입력 후 Enter" style="width:150px;margin:0">':'<button class="chip" data-act="addtag" aria-label="태그 추가">+</button>');
   const sc=$("rec").scrollTop;
   $("rec").innerHTML='<div><div class="rh"><button data-act="close" aria-label="닫기" style="font-size:1.8rem">‹</button><h2>기분 기록하기</h2><button class="ok" data-act="save">완료</button></div>'
@@ -543,7 +580,7 @@ function toast(t){const el=document.createElement("div");el.className="toast";el
 document.addEventListener("click",ev=>{
   const b=ev.target.closest("[data-act]");if(!b)return;
   const a=b.dataset.act,d=S.draft,v=b.dataset.v;
-  if(a==="tab"){S.tab=v;S.sub=null;render();tabIn();window.scrollTo(0,0)}
+  if(a==="tab"){S.tab=v;S.sub=null;render();window.scrollTo(0,0)}
   else if(a==="shift"){shift(Number(b.dataset.d));render()}
   else if(a==="pick"){S.sel=b.dataset.k;render()}
   else if(a==="stat"){S.stat=v;pgSet(PM.indexOf(v),true)}
@@ -565,6 +602,7 @@ document.addEventListener("click",ev=>{
   else if(a==="close")closeRec();
   else if(a==="mood"){d.m=Number(b.dataset.i);vRec()}
   else if(a==="tag"){const t=b.dataset.t,i=d.tags.indexOf(t);i>=0?d.tags.splice(i,1):d.tags.push(t);vRec()}
+  else if(a==="deltag"){const t=b.dataset.t;DB.tags=DB.tags.filter(x=>x!==t);DB.hid=DB.hid||[];if(!DB.hid.includes(t))DB.hid.push(t);d.tags=d.tags.filter(x=>x!==t);DB.tagsU=Date.now();save();pushTags();vRec()}
   else if(a==="addtag"){S.adding=true;vRec()}
   else if(a==="rmphoto"){d.photos.splice(Number(b.dataset.i),1);vRec()}
   else if(a==="save"){saveRec()}
@@ -578,7 +616,7 @@ document.addEventListener("input",ev=>{
 document.addEventListener("keydown",ev=>{
   if(ev.target.id==="newtag"&&ev.key==="Enter"){
     ev.preventDefault();const t=ev.target.value.trim().replace(/^#/,"");
-    if(t){if(!allTags().includes(t)){DB.tags.push(t);save();pushTags()}if(!S.draft.tags.includes(t))S.draft.tags.push(t)}
+    if(t){if(DB.hid)DB.hid=DB.hid.filter(x=>x!==t);if(!allTags().includes(t)){DB.tags.push(t);DB.tagsU=Date.now();save();pushTags()}else save();if(!S.draft.tags.includes(t))S.draft.tags.push(t)}
     S.adding=false;vRec();
   }
   else if(ev.target.id==="nick"&&ev.key==="Enter"){ev.preventDefault();saveNick()}
@@ -597,14 +635,15 @@ const col=()=>db.collection("users").doc(user.uid).collection("entries");
 async function pushDay(k){if(!fb||!user)return;try{await col().doc(k).set(wire(DB.entries[k]))}catch(e){toast("서버 저장에 실패했어요. 동기화 버튼으로 다시 시도하세요")}}
 async function pushUser(){if(!fb||!user)return;try{await db.collection("users").doc(user.uid).set({nick:DB.nick||"",email:user.email||"",joined:(user.metadata&&user.metadata.creationTime)||"",lastSeen:firebase.firestore.FieldValue.serverTimestamp(),count:Object.keys(DB.entries).filter(ent).length},{merge:true})}catch(e){}}
 async function pushProfile(){if(!fb||!user)return;try{await col().doc("__profile").set({nick:DB.nick||"",u:DB.nickU||0});pushUser()}catch(e){}}
-async function pushTags(){if(!fb||!user)return;try{await col().doc("__tags").set({tags:DB.tags})}catch(e){}}
+async function pushTags(){if(!fb||!user)return;try{await col().doc("__tags").set({tags:DB.tags,hid:DB.hid||[],u:DB.tagsU||0})}catch(e){}}
 async function pullAll(){
   if(!fb||!user)return;
   try{
     const snap=await col().get(),remote={};
     snap.forEach(x=>{remote[x.id]=mig(x.data())});
-    ((remote.__tags&&remote.__tags.tags)||[]).forEach(t=>{if(!BASE.includes(t)&&!DB.tags.includes(t))DB.tags.push(t)});
-    const up=[["__tags",{tags:DB.tags}]];
+    const rt=remote.__tags;
+    if(rt){if((rt.u||0)>(DB.tagsU||0)){DB.tags=rt.tags||[];DB.hid=rt.hid||[];DB.tagsU=rt.u}else if(!(rt.u||0)&&!(DB.tagsU||0)){(rt.tags||[]).forEach(t=>{if(!BASE.includes(t)&&!DB.tags.includes(t))DB.tags.push(t)})}}
+    const up=[["__tags",{tags:DB.tags,hid:DB.hid||[],u:DB.tagsU||0}]];
     const rp=remote.__profile;
     if(rp&&(rp.u||0)>(DB.nickU||0)){DB.nick=rp.nick||"";DB.nickU=rp.u}
     else if(DB.nickU&&DB.nickU>((rp&&rp.u)||0))up.push(["__profile",{nick:DB.nick||"",u:DB.nickU}]);
