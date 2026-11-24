@@ -41,6 +41,7 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .day .dot{width:5px;height:5px;border-radius:50%;background:var(--pri)}
 .day.sel{background:var(--soft);box-shadow:inset 0 0 0 2px var(--pri)}
 .day.today span{color:var(--pri);font-weight:700}
+.day.holiday span:first-child{color:#E65B67;font-weight:700;}
 .day:disabled{cursor:default;color:var(--sub)}
 .sum{display:flex;align-items:center;gap:14px;width:100%;background:var(--soft);border-radius:24px;padding:14px 16px;margin-top:10px}
 .sum svg{width:54px;height:54px;flex:none}
@@ -276,12 +277,57 @@ function shift(d){
 const atNow=()=>S.y===now.getFullYear()&&((S.tab==="stat"&&S.stat==="y")||S.m===now.getMonth());
 const arr=(d,dis)=>'<button class="arrow" data-act="shift" data-d="'+d+'" aria-label="'+(d<0?"이전":"다음")+'"'+(dis?" disabled":"")+'>'+(d<0?"‹":"›")+'</button>';
 
+const HOLIDAYS={
+  "2026-01-01":1,
+  "2026-02-16":1,
+  "2026-02-17":1,
+  "2026-02-18":1,
+  "2026-03-01":1,
+  "2026-03-02":1,
+  "2026-05-05":1,
+  "2026-05-24":1,
+  "2026-05-25":1,
+  "2026-06-06":1,
+  "2026-08-15":1,
+  "2026-08-17":1,
+  "2026-09-24":1,
+  "2026-09-25":1,
+  "2026-09-26":1,
+  "2026-09-28":1,
+  "2026-10-03":1,
+  "2026-10-05":1,
+  "2026-10-09":1,
+  "2026-12-25":1,
+
+  "2027-01-01":1,
+  "2027-02-06":1,
+  "2027-02-07":1,
+  "2027-02-08":1,
+  "2027-02-09":1,
+  "2027-03-01":1,
+  "2027-05-05":1,
+  "2027-05-13":1,
+  "2027-06-06":1,
+  "2027-06-07":1,
+  "2027-08-15":1,
+  "2027-08-16":1,
+  "2027-09-14":1,
+  "2027-09-15":1,
+  "2027-09-16":1,
+  "2027-10-03":1,
+  "2027-10-04":1,
+  "2027-10-09":1,
+  "2027-10-11":1,
+  "2027-12-25":1,
+  "2027-12-27":1
+};
+
 function vCal(){
   const first=new Date(S.y,S.m,1).getDay(),n=new Date(S.y,S.m+1,0).getDate();
   let g=DOW.map(d=>'<div class="w">'+d+'</div>').join("")+'<div></div>'.repeat(first);
   for(let d=1;d<=n;d++){
     const k=iso(S.y,S.m,d),e=ent(k);
-    g+='<button class="day'+(k===S.sel?" sel":"")+(k===TODAY?" today":"")+'" data-act="pick" data-k="'+k+'"'+(k>TODAY?" disabled":"")+' aria-label="'+sdate(k)+(e?" "+L[e.m]:"")+'"><span>'+d+'</span>'+(e?face(e.m,28):'<i class="ph"></i>')+'<i class="dot" style="visibility:'+(e&&(e.n||e.photo||(e.photos&&e.photos.length))?"visible":"hidden")+'"></i></button>';
+    g+='<button class="day'+(HOLIDAYS[k]?" holiday":"")+(k===S.sel?" sel":"")+(k===TODAY?" today":"")+'" data-act="pick" data-k="'+k+'"'+(k>TODAY?" disabled":"")+' aria-label="'+sdate(k)+(e?" "+L[e.m]:"")+'"><span>'+d+'</span>'+(e?face(e.m,28):'<i class="ph"></i>')+'<i class="dot" style="visibility:'+(e&&(e.n||e.photo||(e.photos&&e.photos.length))?"visible":"hidden")+'"></i></button>';
   }
   const e=ent(S.sel);
   const sum=e?'<button class="sum" data-act="open" data-k="'+S.sel+'">'+face(e.m,54)+'<div><small>'+sdate(S.sel)+'</small><b>'+L[e.m]+'!</b>'+(e.n?'<p style="'+nst(e,.83)+'">'+esc(e.n)+'</p>':"")+'</div><span class="chev">›</span></button>'
