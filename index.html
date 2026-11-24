@@ -41,6 +41,10 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .day .dot{width:5px;height:5px;border-radius:50%;background:var(--pri)}
 .day.sel{background:var(--soft);box-shadow:inset 0 0 0 2px var(--pri)}
 .day.today span{color:var(--pri);font-weight:700}
+/* 주말은 회색 */
+.day.saturday span:first-child,
+.day.sunday span:first-child{color:#999999;}
+/* 공휴일은 빨간색 (주말 공휴일도 빨간색 우선) */
 .day.holiday span:first-child{color:#E65B67;font-weight:700;}
 .day:disabled{cursor:default;color:var(--sub)}
 .sum{display:flex;align-items:center;gap:14px;width:100%;background:var(--soft);border-radius:24px;padding:14px 16px;margin-top:10px}
@@ -327,7 +331,7 @@ function vCal(){
   let g=DOW.map(d=>'<div class="w">'+d+'</div>').join("")+'<div></div>'.repeat(first);
   for(let d=1;d<=n;d++){
     const k=iso(S.y,S.m,d),e=ent(k);
-    g+='<button class="day'+(HOLIDAYS[k]?" holiday":"")+(k===S.sel?" sel":"")+(k===TODAY?" today":"")+'" data-act="pick" data-k="'+k+'"'+(k>TODAY?" disabled":"")+' aria-label="'+sdate(k)+(e?" "+L[e.m]:"")+'"><span>'+d+'</span>'+(e?face(e.m,28):'<i class="ph"></i>')+'<i class="dot" style="visibility:'+(e&&(e.n||e.photo||(e.photos&&e.photos.length))?"visible":"hidden")+'"></i></button>';
+    g+='<button class="day'+(new Date(S.y,S.m,d).getDay()===0?" sunday":"")+(new Date(S.y,S.m,d).getDay()===6?" saturday":"")+(HOLIDAYS[k]?" holiday":"")+(k===S.sel?" sel":"")+(k===TODAY?" today":"")+'" data-act="pick" data-k="'+k+'"'+(k>TODAY?" disabled":"")+' aria-label="'+sdate(k)+(e?" "+L[e.m]:"")+'"><span>'+d+'</span>'+(e?face(e.m,28):'<i class="ph"></i>')+'<i class="dot" style="visibility:'+(e&&(e.n||e.photo||(e.photos&&e.photos.length))?"visible":"hidden")+'"></i></button>';
   }
   const e=ent(S.sel);
   const sum=e?'<button class="sum" data-act="open" data-k="'+S.sel+'">'+face(e.m,54)+'<div><small>'+sdate(S.sel)+'</small><b>'+L[e.m]+'!</b>'+(e.n?'<p style="'+nst(e,.83)+'">'+esc(e.n)+'</p>':"")+'</div><span class="chev">›</span></button>'
