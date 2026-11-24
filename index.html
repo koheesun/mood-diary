@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>오늘의 기분</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Gaegu:wght@400;700&family=Nanum+Pen+Script&family=Gamja+Flower&family=Hi+Melody&family=Poor+Story&family=Single+Day&family=Yeon+Sung&family=East+Sea+Dokdo&family=Jua&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <style>
 :root{
-  --bg:#FBFAFF;--card:#FFFFFF;--ink:#27243C;--sub:#908DA8;--line:#EFEDF8;--soft:#F1EFFC;--pri:#7C6CE2;
-  --c0:#FFC94F;--c1:#9DDBB8;--c2:#DCD8E8;--c3:#91AEEB;--c4:#FF8D9E;--eye:#3E3A4F;--sh:0 4px 18px rgba(124,108,226,.09);
+  --bg:#FFFFFF;--card:#FFFFFF;--ink:#26262E;--sub:#8E8E99;--line:#ECECEF;--soft:#F5F5F7;--pri:#7C6CE2;
+  --c0:#FFC94F;--c1:#9DDBB8;--c2:#DCD8E8;--c3:#91AEEB;--c4:#FF8D9E;--eye:#3E3A4F;--sh:0 2px 14px rgba(0,0,0,.06);
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1A1830;--card:#26233F;--ink:#EEEBFF;--sub:#A5A1C8;--line:#38345A;--soft:#322F55;--pri:#9082F0;--sh:0 4px 18px rgba(0,0,0,.25)}}
-:root[data-theme="dark"]{--bg:#1A1830;--card:#26233F;--ink:#EEEBFF;--sub:#A5A1C8;--line:#38345A;--soft:#322F55;--pri:#9082F0;--sh:0 4px 18px rgba(0,0,0,.25)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121214;--card:#1C1C20;--ink:#F2F2F5;--sub:#9A9AA6;--line:#2C2C32;--soft:#2A2A30;--pri:#9C8FF0;--sh:0 2px 14px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#121214;--card:#1C1C20;--ink:#F2F2F5;--sub:#9A9AA6;--line:#2C2C32;--soft:#2A2A30;--pri:#9C8FF0;--sh:0 2px 14px rgba(0,0,0,.35)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.5}
@@ -49,8 +49,8 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .sum p{margin:2px 0 0;color:var(--sub);font-size:.84rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sum>div{min-width:0;flex:1}
 .chev{color:var(--pri);font-size:1.3rem;margin-left:auto;flex:none}
-.fab{position:fixed;bottom:calc(92px + env(safe-area-inset-bottom,0px));right:max(18px,calc(50vw - 202px));width:54px;height:54px;border-radius:50%;background:var(--pri);color:#fff;font-size:2rem;line-height:1;text-align:center;box-shadow:0 8px 18px rgba(124,108,226,.45)}
-.tabs{position:fixed;bottom:0;left:0;right:0;z-index:5;background:var(--card);border-radius:24px 24px 0 0;box-shadow:0 -6px 24px rgba(124,108,226,.10);padding-bottom:env(safe-area-inset-bottom,0px)}
+.fab{position:fixed;bottom:calc(92px + env(safe-area-inset-bottom,0px));right:max(18px,calc(50vw - 202px));width:54px;height:54px;border-radius:50%;background:var(--pri);color:#fff;font-size:2rem;line-height:1;text-align:center;box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:5;background:var(--card);border-radius:24px 24px 0 0;box-shadow:0 -6px 24px rgba(0,0,0,.06);padding-bottom:env(safe-area-inset-bottom,0px)}
 .tabs div{max-width:440px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
 .tabs button{padding:11px 0 9px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.74rem;color:var(--sub)}
 .tabs button.on{color:var(--pri);font-weight:700}
@@ -113,7 +113,7 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .cnt{text-align:right;color:var(--sub);font-size:.8rem}
 .ip{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink);font:inherit;margin:4px 0}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
-.photo{display:block;width:100%;border:2px dashed #CFC8F3;border-radius:18px;padding:16px;color:var(--sub);text-align:center;cursor:pointer;background:var(--soft);font-size:.9rem}
+.photo{display:block;width:100%;border:2px dashed #D6D6DC;border-radius:18px;padding:16px;color:var(--sub);text-align:center;cursor:pointer;background:var(--soft);font-size:.9rem}
 .photo img{width:100%;max-height:220px;object-fit:cover;border-radius:12px;display:block}
 .photo .i{color:var(--ink)}
 .btn{width:100%;background:var(--pri);color:#fff;border-radius:999px;padding:15px;font-weight:700;font-size:1.05rem;text-align:center;margin-top:18px}
@@ -122,7 +122,7 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .ov.dt>div{padding:0 0 24px;max-width:440px}
 .dbar{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));left:12px;right:12px;display:flex;justify-content:space-between;z-index:2}
 .dbar button{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.85);color:#27243C;display:grid;place-items:center}
-.ov.dt>div:has(.hs) .dbar button{background-color: #e1ddfd;}
+.ov.dt>div:has(.hs) .dbar button{background-color: rgba(255,255,255,.9);}
 .menu{position:absolute;top:56px;right:12px;background:var(--card);border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.2);padding:6px;z-index:3;min-width:150px}
 .menu button{display:block;width:100%;padding:10px 12px;border-radius:10px}
 .menu .warn{color:#E5384F;font-weight:700}
@@ -157,7 +157,7 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .pgr .it{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background:var(--soft)}
 .pgr .it img{width:100%;height:100%;object-fit:cover;display:block}
 .pgr .x{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;font-size:1rem;line-height:1}
-.pgr .add{aspect-ratio:1;border:2px dashed #CFC8F3;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--sub);background:var(--soft);cursor:pointer;text-align:center;font-size:.8rem}
+.pgr .add{aspect-ratio:1;border:2px dashed #D6D6DC;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--sub);background:var(--soft);cursor:pointer;text-align:center;font-size:.8rem}
 .lb{position:fixed;inset:0;z-index:30;background:rgba(10,8,20,.94);overflow:hidden}
 .lbi{position:absolute;inset:0;display:grid;place-items:center}
 .lbi img{display:block;width:100%;height:100%;object-fit:contain}
@@ -181,7 +181,7 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .utab{position:relative}
 .utab button{position:relative;z-index:1}
 .utab button.on{background:transparent;box-shadow:none}
-.ui{position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px)/3);border-radius:13px;background:var(--card);box-shadow:inset 0 -2px 0 var(--pri),0 2px 8px rgba(124,108,226,.12);will-change:transform}
+.ui{position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px)/3);border-radius:13px;background:var(--card);box-shadow:inset 0 -2px 0 var(--pri),0 2px 8px rgba(0,0,0,.08);will-change:transform}
 .pager{overflow:hidden;margin:-8px -18px -20px}
 .track{display:flex;will-change:transform}
 .panel{flex:0 0 100%;min-width:0;padding:8px 18px 20px}
@@ -196,6 +196,11 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .cx{background:var(--soft);color:var(--sub);padding:0 12px 0 2px;border-radius:0 18px 18px 0;font-size:1.05rem;line-height:1}
 .chipw .chip.on{box-shadow:inset 2px 0 0 var(--pri),inset 0 2px 0 var(--pri),inset 0 -2px 0 var(--pri)}
 .chipw .chip.on+.cx{box-shadow:inset -2px 0 0 var(--pri),inset 0 2px 0 var(--pri),inset 0 -2px 0 var(--pri);color:var(--pri)}
+.sws{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:4px 2px 8px}
+.cw{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);position:relative;display:grid;place-items:center;font-size:.85rem;font-weight:700;padding:0;overflow:hidden;color:var(--ink)}
+.cw.on{outline:2px solid var(--ink);outline-offset:2px}
+.cw.cust{background:conic-gradient(#f44,#fc4,#4d4,#4cf,#44f,#f4c,#f44);border:0}
+.cw.cust input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0}
 </style>
 </head>
 <body>
@@ -279,7 +284,7 @@ function vCal(){
     g+='<button class="day'+(k===S.sel?" sel":"")+(k===TODAY?" today":"")+'" data-act="pick" data-k="'+k+'"'+(k>TODAY?" disabled":"")+' aria-label="'+sdate(k)+(e?" "+L[e.m]:"")+'"><span>'+d+'</span>'+(e?face(e.m,28):'<i class="ph"></i>')+'<i class="dot" style="visibility:'+(e&&(e.n||e.photo||(e.photos&&e.photos.length))?"visible":"hidden")+'"></i></button>';
   }
   const e=ent(S.sel);
-  const sum=e?'<button class="sum" data-act="open" data-k="'+S.sel+'">'+face(e.m,54)+'<div><small>'+sdate(S.sel)+'</small><b>'+L[e.m]+'!</b>'+(e.n?'<p>'+esc(e.n)+'</p>':"")+'</div><span class="chev">›</span></button>'
+  const sum=e?'<button class="sum" data-act="open" data-k="'+S.sel+'">'+face(e.m,54)+'<div><small>'+sdate(S.sel)+'</small><b>'+L[e.m]+'!</b>'+(e.n?'<p style="'+nst(e,.83)+'">'+esc(e.n)+'</p>':"")+'</div><span class="chev">›</span></button>'
     :'<button class="sum" data-act="edit" data-k="'+S.sel+'"><div><small>'+sdate(S.sel)+'</small><b>아직 기록이 없어요</b><p>눌러서 오늘의 기분을 남겨보세요</p></div><span class="chev">›</span></button>';
   const nk=DB.nick?'<span class="nick">'+esc(DB.nick)+'</span>님 오늘은':"오늘은";
   return '<div class="hd"><h1>'+nk+'<br>어떤 하루였나요?</h1><button class="ic" data-act="tab" data-v="set" aria-label="설정">'+ico("smile")+'</button></div>'
@@ -419,7 +424,7 @@ function listItems(){
   }).sort().reverse();
   if(!ks.length)return '<div class="empty">'+(q||S.f>=0?"조건에 맞는 기록이 없어요.":"아직 기록이 없어요.<br>오늘의 기분을 남겨보세요.")+'</div>';
   return '<div class="lst">'+ks.map(k=>{const e=DB.entries[k];
-    return '<button class="li" data-act="open" data-k="'+k+'">'+tile(e.m,38)+'<div class="tx"><small>'+ldate(k)+'</small><b>'+L[e.m]+'</b>'+(e.n?'<p>'+esc(e.n)+'</p>':"")+'</div>'+(plist(e).length?pimg(plist(e)[0],"t","","첨부 사진"):"")+'<span class="chev" style="color:var(--sub)">›</span></button>'}).join("")+'</div>';
+    return '<button class="li" data-act="open" data-k="'+k+'">'+tile(e.m,38)+'<div class="tx"><small>'+ldate(k)+'</small><b>'+L[e.m]+'</b>'+(e.n?'<p style="'+nst(e,.83)+'">'+esc(e.n)+'</p>':"")+'</div>'+(plist(e).length?pimg(plist(e)[0],"t","","첨부 사진"):"")+'<span class="chev" style="color:var(--sub)">›</span></button>'}).join("")+'</div>';
 }
 function vList(){
   const ch=['<button class="chip'+(S.f<0?" on":"")+'" data-act="filter" data-v="-1">전체</button>'].concat(CH.map((t,i)=>'<button class="chip'+(S.f===i?" on":"")+'" data-act="filter" data-v="'+i+'">'+t+'</button>')).join("");
@@ -432,8 +437,8 @@ function vList(){
 function acctCard(){
   if(!fb)return "";
   const ps='style="margin:0 0 10px;color:var(--sub);font-size:.88rem"';
-  if(user)return '<div class="card"><h3>☁️ 서버 동기화</h3><p '+ps+'>'+esc(user.email)+' 계정에 기록이 자동으로 저장돼요.</p><div style="display:flex;gap:8px"><button class="chip fill" data-act="sync">지금 동기화</button><button class="chip" data-act="signout">로그아웃</button></div></div>';
-  return '<div class="card"><h3>☁️ 로그인하고 기록 보관하기</h3><p '+ps+'>로그인하면 기록이 서버에 저장되어 휴대폰과 컴퓨터에서 같이 볼 수 있어요.</p><input class="ip" id="em" type="email" autocomplete="email" placeholder="이메일"><input class="ip" id="pw" type="password" autocomplete="current-password" placeholder="비밀번호 (6자 이상)"><div style="display:flex;gap:8px;margin-top:8px"><button class="chip fill" data-act="signin">로그인</button><button class="chip" data-act="signup">처음이에요 (가입)</button></div></div>';
+  if(user)return '<div class="card"><h3>☁️ 서버 동기화</h3><p '+ps+'>'+esc(user.email)+' 계정에 기록이 자동으로 저장돼요. '+syncStatus()+'</p><div style="display:flex;gap:8px"><button class="chip fill" data-act="sync">지금 동기화</button><button class="chip" data-act="signout">로그아웃</button></div></div>';
+  return '<div class="card"><h3>☁️ 로그인하고 기록 보관하기</h3><p '+ps+'>로그인하면 기록이 서버에 저장되어 휴대폰과 컴퓨터에서 같이 볼 수 있어요.</p><input class="ip" id="em" type="email" autocomplete="email" placeholder="이메일"><input class="ip" id="pw" type="password" autocomplete="current-password" placeholder="비밀번호 (6자 이상)"><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button class="chip fill" data-act="signin">로그인</button><button class="chip" data-act="signup">처음이에요 (가입)</button></div><button class="del" data-act="resetpw">비밀번호를 잊으셨나요?</button></div>';
 }
 function vSet(){
   if(S.sub)return vSub();
@@ -451,7 +456,7 @@ function vSub(){
   const v=S.sub,total=Object.keys(DB.entries).filter(ent).length;
   if(v==="profile")return hd("닉네임")+'<div class="card"><p '+ps+'>달력 화면 인사말 앞에 표시돼요. (최대 10자)</p><input class="ip" id="nick" maxlength="10" value="'+esc(DB.nick||"")+'" placeholder="닉네임 입력"><button class="btn" data-act="nick">저장하기</button></div><p class="hint">지금까지 '+total+'일의 기분을 기록했어요</p>';
   if(v==="account")return hd("로그인 · 서버 동기화")+(fb?acctCard():'<div class="card"><p style="margin:0">서버 동기화가 설정되지 않았어요.</p></div>');
-  if(v==="backup")return hd("데이터 백업하기")+'<div class="card"><p '+ps+'>기록은 이 브라우저에 저장돼요. 가끔 파일로 내보내 두면 기기를 바꾸거나 데이터가 지워져도 안전해요. 단, 원본 사진은 용량이 커서 이 기기에만 저장되고 백업 파일에는 들어가지 않아요.</p><div style="display:flex;gap:8px"><button class="chip fill" data-act="export">내보내기</button><label class="chip" style="cursor:pointer">불러오기<input type="file" id="imp" accept="application/json,.json" hidden></label></div></div>';
+  if(v==="backup")return hd("데이터 백업하기")+'<div class="card"><p '+ps+'>기분, 한마디, 태그, 사진을 한 파일(.zip)로 저장해요. 클라우드나 메일에 보관해 두면 기기를 바꾸거나 데이터가 지워져도 복원할 수 있어요. 불러올 때는 지금 기록을 덮어쓰지 않고, 없는 날짜와 빠진 사진만 채워요.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="chip fill" data-act="exportzip">사진 포함 백업</button><label class="chip" style="cursor:pointer">불러오기<input type="file" id="imp" accept=".zip,.json,application/zip,application/json" hidden></label><button class="chip" data-act="export">텍스트만(.json)</button></div></div>';
   if(v==="period"){const c=DB.statDef||"m";return hd("통계 기간 설정")+'<div class="card rows">'+opt("setstat","m","이번 달",c)+opt("setstat","y","올해",c)+opt("setstat","a","전체 기간",c)+'</div>'}
   if(v==="theme"){const c=DB.theme||"system";return hd("테마 설정")+'<div class="card rows">'+opt("settheme","system","시스템 설정",c)+opt("settheme","light","라이트 모드",c)+opt("settheme","dark","다크 모드",c)+'</div>'}
   return hd("앱 정보")+'<div class="card"><h3>오늘의 기분</h3><p '+ps+'>매일의 기분을 얼굴로 남기는 개인 다이어리예요.<br>기록 '+total+'일 · 로그인하면 서버에도 저장돼요.</p></div>';
@@ -472,7 +477,7 @@ async function pGet(k){const d=await idbOpen();return new Promise((res,rej)=>{co
 const URLS={};
 async function pDel(k){try{const d=await idbOpen();if(URLS[k]){URL.revokeObjectURL(URLS[k]);delete URLS[k]}return new Promise(res=>{const t=d.transaction("p","readwrite");t.objectStore("p").delete(k);t.oncomplete=res;t.onerror=res})}catch(e){}}
 async function pUrl(k){if(URLS[k])return URLS[k];try{const b=await pGet(k);if(!b)return "";return URLS[k]=URL.createObjectURL(b)}catch(e){return ""}}
-const plist=e=>e?(e.photos||[]).map(id=>({id:id})).concat(e.photo?[{l:e.photo}]:[]):[];
+const plist=e=>e?(e.photos||[]).map(id=>({id:id})).concat((e.pd||[]).map(u=>({l:u}))).concat(e.photo?[{l:e.photo}]:[]):[];
 const pimg=(p,kind,cls,alt)=>p.l?'<img'+(cls?' class="'+cls+'"':"")+' src="'+p.l+'" alt="'+alt+'">':'<img'+(cls?' class="'+cls+'"':"")+' data-p="'+kind+':'+p.id+'" alt="'+alt+'">';
 function d2b(u){const a=u.split(","),m=/:(.*?);/.exec(a[0])[1],bin=atob(a[1]),x=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)x[i]=bin.charCodeAt(i);return new Blob([x],{type:m})}
 async function mkThumb(f){
@@ -485,18 +490,34 @@ async function mkThumb(f){
     return await new Promise(r=>c.toBlob(r,"image/jpeg",.8));
   }catch(e){return null}
 }
-async function mkOpt(f){
+async function mkOpt(f,strict){
+  const mem=async()=>new Blob([await f.arrayBuffer()],{type:f.type||"image/jpeg"});
   try{
     const u=URL.createObjectURL(f);
     const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=u});
     const m0=Math.max(im.naturalWidth,im.naturalHeight);
-    if(m0<=2560&&f.size<=1500000){URL.revokeObjectURL(u);return f}
+    if(m0<=2560&&f.size<=1500000){URL.revokeObjectURL(u);return strict?await mem():f}
     const sc=Math.min(1,2560/m0),c=document.createElement("canvas");
     c.width=Math.max(1,Math.round(im.naturalWidth*sc));c.height=Math.max(1,Math.round(im.naturalHeight*sc));
     const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
     const b=await new Promise(r=>c.toBlob(r,"image/jpeg",.88));
-    return b&&b.size<f.size?b:f;
-  }catch(e){return f}
+    return b&&b.size<f.size?b:(strict?await mem():f);
+  }catch(e){if(strict)throw e;return f}
+}
+async function toDataUrl(f,max,q){
+  const u=URL.createObjectURL(f);
+  const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=u});
+  const sc=Math.min(1,max/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement("canvas");
+  c.width=Math.max(1,Math.round(im.naturalWidth*sc));c.height=Math.max(1,Math.round(im.naturalHeight*sc));
+  const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+  return c.toDataURL("image/jpeg",q);
+}
+const isHeic=f=>/heic|heif/i.test(f.type||"")||/\.(heic|heif)$/i.test(f.name||"");
+function loadScript(u){return new Promise((res,rej)=>{const s=document.createElement("script");s.src=u;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
+async function heicToJpeg(f){
+  if(!window.heic2any)await loadScript("https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js");
+  const r=await window.heic2any({blob:f,toType:"image/jpeg",quality:.9});
+  return Array.isArray(r)?r[0]:r;
 }
 async function hyd(){
   const ims=document.querySelectorAll("img[data-p]");
@@ -504,26 +525,38 @@ async function hyd(){
     if(im.getAttribute("src"))continue;
     const key=im.dataset.p;let u=await pUrl(key);
     if(!u&&key[0]==="t")u=await pUrl("o"+key.slice(1));
-    if(u)im.src=u;
+    if(u)im.src=u;else{im.dataset.miss="1";const m=$("pmiss");if(m)m.hidden=false}
   }
 }
+document.addEventListener("error",ev=>{const t=ev.target;if(t&&t.tagName==="IMG"&&t.closest&&t.closest("#det,#rec,#screen")){t.dataset.miss="1";const m=$("pmiss");if(m)m.hidden=false}},true);
 let hq=0;
 try{new MutationObserver(()=>{if(!hq){hq=1;requestAnimationFrame(()=>{hq=0;hyd()})}}).observe(document.body,{childList:true,subtree:true})}catch(e){}
-const wire=e=>{if(!e||!e.photos)return e;const o=Object.assign({},e);delete o.photos;o.pn=e.photos.length;return o};
+const wire=e=>{if(!e||(!e.photos&&!e.pd))return e;const o=Object.assign({},e);delete o.photos;delete o.pd;o.pn=(e.photos||[]).length+(e.pd||[]).length;return o};
 let saving=false;
 async function saveRec(){
   if(saving)return;saving=true;
-  const d=S.draft,ids=[];
+  const d=S.draft;let ids=[],pd=[],fallback=false;
   try{
     for(const p of d.photos){
-      if(p.file){await pPut("o:"+p.id,await mkOpt(p.file));const t=await mkThumb(p.file);if(t)await pPut("t:"+p.id,t)}
+      if(p.file){
+        await pPut("o:"+p.id,p.file);
+        const back=await pGet("o:"+p.id);if(!back||!back.size)throw new Error("verify");
+        const t=await mkThumb(p.file);if(t)await pPut("t:"+p.id,t);
+      }
       ids.push(p.id);
     }
-  }catch(e){saving=false;toast("사진을 저장하지 못했어요. 저장 공간을 확인해 주세요");return}
+  }catch(e){fallback=true}
+  if(fallback){
+    ids=[];pd=[];
+    try{for(const p of d.photos){if(p.file)pd.push(await toDataUrl(p.file,1280,.8));else ids.push(p.id)}}
+    catch(e){saving=false;toast("사진을 저장하지 못했어요. 다른 사진으로 다시 시도해 주세요");return}
+  }
   d.orig.filter(id=>!ids.includes(id)).forEach(id=>{pDel("o:"+id);pDel("t:"+id)});
-  DB.entries[d.k]={m:d.m,n:d.n,tags:d.tags,photos:ids,u:Date.now(),v:2};
-  if(!save()){toast("저장 공간이 부족해요");saving=false;return}
-  toast("저장했어요");pushDay(d.k);
+  const en={m:d.m,n:d.n,tags:d.tags,photos:ids,u:Date.now(),v:2,f:d.f,c:d.c};
+  if(pd.length)en.pd=pd;
+  DB.entries[d.k]=en;DB.pref={f:d.f,c:d.c};
+  if(!save()){toast("저장 공간이 부족해요. 사진을 줄이거나 백업 후 정리해 주세요");saving=false;return}
+  toast(pd.length?"이 브라우저는 사진 저장소를 쓸 수 없어서 사진을 작게 줄여 저장했어요":"저장했어요");pushDay(d.k);
   const pk=parse(d.k);S.sel=d.k;S.y=pk[0];S.m=pk[1]-1;saving=false;closeRec();
 }
 async function openLb(i){
@@ -538,6 +571,34 @@ document.addEventListener("click",ev=>{if(ev.target.closest&&ev.target.closest("
 document.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!$("lb").hidden)closeLb()});
 document.addEventListener("scroll",ev=>{const t=ev.target;if(t&&t.id==="hs"){const i=Math.round(t.scrollLeft/t.clientWidth),c=$("hc");if(c)c.textContent=(i+1)+" / "+t.children.length}},true);
 
+/* 글씨체 / 글씨 색 */
+const FONTS=[
+ {k:"noto",n:"기본체",f:"'Noto Sans KR',sans-serif",s:1},
+ {k:"gaegu",n:"개구",f:"'Gaegu','Noto Sans KR',cursive",s:1.2},
+ {k:"pen",n:"나눔펜",f:"'Nanum Pen Script','Noto Sans KR',cursive",s:1.4},
+ {k:"gamja",n:"감자꽃",f:"'Gamja Flower','Noto Sans KR',cursive",s:1.15},
+ {k:"melody",n:"하이멜로디",f:"'Hi Melody','Noto Sans KR',cursive",s:1.15},
+ {k:"story",n:"푸어스토리",f:"'Poor Story','Noto Sans KR',cursive",s:1.05},
+ {k:"single",n:"싱글데이",f:"'Single Day','Noto Sans KR',cursive",s:1.1},
+ {k:"yeon",n:"연성",f:"'Yeon Sung','Noto Sans KR',cursive",s:1.05},
+ {k:"dokdo",n:"동해독도",f:"'East Sea Dokdo','Noto Sans KR',cursive",s:1.45},
+ {k:"jua",n:"주아",f:"'Jua','Noto Sans KR',sans-serif",s:1},
+ {k:"batang",n:"고운바탕",f:"'Gowun Batang','Noto Sans KR',serif",s:1}
+];
+const PALETTE=[["","기본"],["#4A7BE0","파랑"],["#35A36B","초록"],["#E0505C","빨강"],["#EA8A2B","주황"],["#8B79F0","보라"],["#EC62A5","분홍"],["#A87550","갈색"]];
+const okc=c=>/^#[0-9a-fA-F]{6}$/.test(c||"")?c:"";
+const fontOf=k=>FONTS.find(f=>f.k===k)||FONTS[1];
+function nst(e,base){const f=fontOf(e&&e.f),c=okc(e&&e.c);return "font-family:"+f.f+";font-size:"+(base*f.s).toFixed(2)+"rem"+(c?";color:"+c:"")}
+function fontPicker(d){
+  const ch=FONTS.map(f=>'<button class="chip'+(d.f===f.k?" on":"")+'" data-act="font" data-v="'+f.k+'" style="font-family:'+f.f+';font-size:'+(f.s*.95).toFixed(2)+'rem">'+f.n+'</button>').join("");
+  const inPal=PALETTE.some(x=>x[0]===d.c);
+  const sw=PALETTE.map(x=>'<button class="cw'+(d.c===x[0]?" on":"")+'" data-act="color" data-v="'+x[0]+'" aria-label="'+x[1]+'" style="background:'+(x[0]||"var(--card)")+'">'+(x[0]?"":"A")+'</button>').join("")
+    +'<label class="cw cust'+(!inPal&&d.c?" on":"")+'" aria-label="색 직접 고르기"><input type="color" id="cc" value="'+(d.c||"#4A7BE0")+'"></label>';
+  return '<div class="lbl" style="margin-top:6px">글씨체</div><div class="chips" style="padding-bottom:6px">'+ch+'</div><div class="lbl" style="margin-top:2px">글씨 색</div><div class="sws">'+sw+'</div>';
+}
+document.addEventListener("input",ev=>{if(ev.target.id==="cc"&&S.draft){S.draft.c=ev.target.value;const n=$("note");if(n)n.style.color=ev.target.value}});
+document.addEventListener("change",ev=>{if(ev.target.id==="cc"&&S.draft){S.draft.c=ev.target.value;vRec()}});
+
 function vRec(){
   const d=S.draft;
   const picks=L.map((t,i)=>'<button class="pk'+(d.m===i?" on":"")+'" data-act="mood" data-i="'+i+'" aria-pressed="'+(d.m===i)+'">'+tile(i,40)+'<small>'+t+'</small></button>').join("");
@@ -547,7 +608,8 @@ function vRec(){
   $("rec").innerHTML='<div><div class="rh"><button data-act="close" aria-label="닫기" style="font-size:1.8rem">‹</button><h2>기분 기록하기</h2><button class="ok" data-act="save">완료</button></div>'
    +'<h3 class="q">'+(d.k===TODAY?"오늘의 기분은 어때요?":sdate(d.k)+"의 기분은 어때요?")+'</h3>'
    +'<div class="picks" role="group" aria-label="기분 선택">'+picks+'</div>'
-   +'<div class="lbl">오늘 하루는 어땠나요?</div><textarea id="note" maxlength="200" placeholder="오늘의 하루를 기록해보세요..." aria-label="하루 기록">'+esc(d.n)+'</textarea><div class="cnt"><span id="cnt">'+d.n.length+'</span> / 200</div>'
+   +'<div class="lbl">오늘 하루는 어땠나요?</div><textarea id="note" maxlength="200" style="'+nst(d,1)+'" placeholder="오늘의 하루를 기록해보세요..." aria-label="하루 기록">'+esc(d.n)+'</textarea><div class="cnt"><span id="cnt">'+d.n.length+'</span> / 200</div>'
+   +fontPicker(d)
    +'<div class="lbl">태그를 추가해보세요 <small>(선택)</small></div><div class="tags">'+chips+'</div>'
    +'<div class="lbl">사진을 추가할까요?</div>'
    +'<div class="pgr">'+d.photos.map((p,i)=>'<div class="it">'+(p.url?'<img src="'+p.url+'" alt="첨부 사진 '+(i+1)+'">':'<img data-p="t:'+p.id+'" alt="첨부 사진 '+(i+1)+'">')+'<button class="x" data-act="rmphoto" data-i="'+i+'" aria-label="사진 지우기">×</button></div>').join("")+'<label class="add">'+ico("cam")+'사진 추가<input type="file" id="file" accept="image/*" multiple hidden></label></div>'
@@ -557,8 +619,8 @@ function vRec(){
 }
 function openRec(k){
   const e=ent(k);
-  S.draft={k:k,m:e?e.m:0,n:(e&&e.n)||"",tags:((e&&e.tags)||[]).slice(),photos:[],orig:((e&&e.photos)||[]).slice()};
-  if(e){(e.photos||[]).forEach(id=>S.draft.photos.push({id:id}));if(e.photo){try{const bl=d2b(e.photo);S.draft.photos.push({id:uid(),file:bl,url:URL.createObjectURL(bl)})}catch(x){}}}
+  S.draft={k:k,m:e?e.m:0,n:(e&&e.n)||"",tags:((e&&e.tags)||[]).slice(),photos:[],orig:((e&&e.photos)||[]).slice(),f:e?(e.f||"gaegu"):((DB.pref&&DB.pref.f)||"gaegu"),c:e?okc(e.c):okc(DB.pref&&DB.pref.c)};
+  if(e){(e.photos||[]).forEach(id=>S.draft.photos.push({id:id}));if(e.photo){try{const bl=d2b(e.photo);S.draft.photos.push({id:uid(),file:bl,url:URL.createObjectURL(bl)})}catch(x){}}(e.pd||[]).forEach(u=>{try{const bl=d2b(u);S.draft.photos.push({id:uid(),file:bl,url:URL.createObjectURL(bl)})}catch(x){}})}
   S.adding=false;$("rec").hidden=false;document.body.style.overflow="hidden";vRec();
 }
 function closeRec(){$("rec").hidden=true;document.body.style.overflow="";S.draft=null;render()}
@@ -569,9 +631,9 @@ function vDet(){
   const menu=S.menu?'<div class="menu"><button data-act="editdet">수정하기</button><button class="warn" data-act="deldet">'+(S.arm?"정말 삭제할까요? 한 번 더 눌러주세요":"삭제하기")+'</button></div>':"";
   $("det").innerHTML='<div>'+hero+'<div class="dbar"><button data-act="closedet" aria-label="뒤로">'+ico("back")+'</button><button data-act="menu" aria-label="더보기">'+ico("more")+'</button></div>'+menu
    +'<div class="sheet"><div class="hh">'+tile(e.m,46)+'<div><small>'+ldate(k)+'</small><h2>'+L[e.m]+'</h2></div></div>'
-   +(e.n?'<p class="note">'+esc(e.n)+'</p>':"")
+   +(e.n?'<p class="note" style="'+nst(e,1.04)+'">'+esc(e.n)+'</p>':"")
    +((e.tags||[]).length?'<div class="tg">'+e.tags.map(t=>'<span>#'+esc(t)+'</span>').join("")+'</div>':"")
-   +(ps.length?'<div class="lbl">기록한 사진'+(ps.length>1?' ('+ps.length+')':"")+'</div><div class="pg">'+ps.map((p,i)=>'<button data-act="zoom" data-i="'+i+'" aria-label="사진 '+(i+1)+' 원본으로 보기">'+pimg(p,"t","","기록한 사진 "+(i+1))+'</button>').join("")+'</div>':"")+'</div></div>';
+   +(ps.length?'<div class="lbl">기록한 사진'+(ps.length>1?' ('+ps.length+')':"")+'</div><div class="pg">'+ps.map((p,i)=>'<button data-act="zoom" data-i="'+i+'" aria-label="사진 '+(i+1)+' 원본으로 보기">'+pimg(p,"t","","기록한 사진 "+(i+1))+'</button>').join("")+'</div>'+(ps.some(function(p){return p.id})?'<p id="pmiss" class="hint" hidden style="text-align:left;margin:8px 0 0">일부 사진이 이 기기에 없어요. 다른 기기에서 올렸거나 브라우저 데이터가 지워졌을 수 있어요. 백업 파일(.zip)을 불러오면 복원돼요.</p>':"")+'':"")+'</div></div>';
 }
 function openDet(k){S.det=k;S.menu=false;S.arm=false;$("det").hidden=false;document.body.style.overflow="hidden";vDet()}
 function closeDet(){$("det").hidden=true;document.body.style.overflow="";S.det=null;S.menu=false;S.arm=false;render()}
@@ -600,6 +662,8 @@ document.addEventListener("click",ev=>{
     const k=S.det;plist(ent(k)).forEach(p=>{if(p.id){pDel("o:"+p.id);pDel("t:"+p.id)}});DB.entries[k]={del:1,u:Date.now()};save();pushDay(k);closeDet();toast("지웠어요");
   }
   else if(a==="close")closeRec();
+  else if(a==="font"){d.f=v;vRec()}
+  else if(a==="color"){d.c=v;vRec()}
   else if(a==="mood"){d.m=Number(b.dataset.i);vRec()}
   else if(a==="tag"){const t=b.dataset.t,i=d.tags.indexOf(t);i>=0?d.tags.splice(i,1):d.tags.push(t);vRec()}
   else if(a==="deltag"){const t=b.dataset.t;DB.tags=DB.tags.filter(x=>x!==t);DB.hid=DB.hid||[];if(!DB.hid.includes(t))DB.hid.push(t);d.tags=d.tags.filter(x=>x!==t);DB.tagsU=Date.now();save();pushTags();vRec()}
@@ -621,23 +685,43 @@ document.addEventListener("keydown",ev=>{
   }
   else if(ev.target.id==="nick"&&ev.key==="Enter"){ev.preventDefault();saveNick()}
 });
-document.addEventListener("change",ev=>{
-  if(ev.target.id!=="file"||!ev.target.files.length)return;
-  Array.from(ev.target.files).forEach(f=>S.draft.photos.push({id:uid(),file:f,url:URL.createObjectURL(f)}));
-  ev.target.value="";vRec();
+document.addEventListener("change",async ev=>{
+  if(ev.target.id!=="file"||!ev.target.files.length||!S.draft)return;
+  const files=Array.from(ev.target.files);let bad=0;
+  toast("사진을 불러오는 중이에요...");
+  for(const f of files){
+    try{
+      let blob;
+      try{blob=await mkOpt(f,true)}
+      catch(x){if(isHeic(f))blob=await mkOpt(await heicToJpeg(f),true);else throw x}
+      if(!S.draft)return;
+      S.draft.photos.push({id:uid(),file:blob,url:URL.createObjectURL(blob)});
+    }catch(x){bad++}
+  }
+  if(!S.draft)return;
+  vRec();
+  if(bad)toast(bad+"장은 열 수 없는 사진이에요. (아이폰 HEIC 등) JPG나 PNG로 바꿔서 올려주세요");
 });
 
 /* Firebase 서버 동기화 */
 const FB={apiKey:"AIzaSyAadAZEGcln9trzwXsWOS95TYLM0dzIQD4",authDomain:"mood-diary-3dde0.firebaseapp.com",projectId:"mood-diary-3dde0",appId:"1:660598871861:web:4942a572f6aab3f31f9e7c"};
 let fb=null,user=null,auth=null,db=null;
-try{if(FB.apiKey&&window.firebase){firebase.initializeApp(FB);auth=firebase.auth();db=firebase.firestore();fb=true}}catch(e){}
+try{if(FB.apiKey&&window.firebase){firebase.initializeApp(FB);auth=firebase.auth();db=firebase.firestore();try{db.enablePersistence({synchronizeTabs:true}).catch(()=>{})}catch(x){}fb=true}}catch(e){}
 const col=()=>db.collection("users").doc(user.uid).collection("entries");
-async function pushDay(k){if(!fb||!user)return;try{await col().doc(k).set(wire(DB.entries[k]))}catch(e){toast("서버 저장에 실패했어요. 동기화 버튼으로 다시 시도하세요")}}
+let lastSync=0,syncDirty=false;
+function syncStatus(){
+  if(navigator.onLine===false)return "(오프라인 · 연결되면 자동으로 올라가요)";
+  if(syncDirty)return "(올리지 못한 기록이 있어요. 곧 다시 시도해요)";
+  return lastSync?"(마지막 동기화 "+new Date(lastSync).toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"})+")":"";
+}
+function softRender(){const a=document.activeElement,sc=$("screen");if(a&&a.tagName&&/INPUT|TEXTAREA/.test(a.tagName)&&sc.contains&&sc.contains(a))return;render()}
+async function pushDay(k){if(!fb||!user)return;if(navigator.onLine===false)syncDirty=true;try{await col().doc(k).set(wire(DB.entries[k]))}catch(e){syncDirty=true;toast("서버 저장에 실패했어요. 연결되면 자동으로 다시 올려요")}}
 async function pushUser(){if(!fb||!user)return;try{await db.collection("users").doc(user.uid).set({nick:DB.nick||"",email:user.email||"",joined:(user.metadata&&user.metadata.creationTime)||"",lastSeen:firebase.firestore.FieldValue.serverTimestamp(),count:Object.keys(DB.entries).filter(ent).length},{merge:true})}catch(e){}}
 async function pushProfile(){if(!fb||!user)return;try{await col().doc("__profile").set({nick:DB.nick||"",u:DB.nickU||0});pushUser()}catch(e){}}
 async function pushTags(){if(!fb||!user)return;try{await col().doc("__tags").set({tags:DB.tags,hid:DB.hid||[],u:DB.tagsU||0})}catch(e){}}
-async function pullAll(){
+async function pullAll(silent){
   if(!fb||!user)return;
+  if(navigator.onLine===false){syncDirty=true;if(S.tab==="set")softRender();return}
   try{
     const snap=await col().get(),remote={};
     snap.forEach(x=>{remote[x.id]=mig(x.data())});
@@ -651,8 +735,8 @@ async function pullAll(){
     Object.keys(remote).forEach(k=>{if(k.startsWith("__"))return;const l=DB.entries[k],r=remote[k];if(!l||(r.u||0)>(l.u||0)){if(l&&l.photos){if(r.del)l.photos.forEach(id=>{pDel("o:"+id);pDel("t:"+id)});else r.photos=l.photos}delete r.pn;DB.entries[k]=r}});
     save();
     for(let i=0;i<up.length;i+=400){const wb=db.batch();up.slice(i,i+400).forEach(([k,x])=>wb.set(col().doc(k),x));await wb.commit()}
-    pushUser();render();toast("동기화했어요");
-  }catch(e){toast("동기화에 실패했어요")}
+    lastSync=Date.now();syncDirty=false;pushUser();migratePhotos();softRender();if(!silent)toast("동기화했어요");
+  }catch(e){syncDirty=true;if(!silent)toast("동기화에 실패했어요")}
 }
 if(fb){
   auth.onAuthStateChanged(u=>{
@@ -660,6 +744,12 @@ if(fb){
     if(user&&(!was||was.uid!==user.uid))pullAll();else render();
   });
 }
+try{
+  window.addEventListener("online",()=>{if(fb&&user)pullAll(true);else if(S.tab==="set")softRender()});
+  window.addEventListener("offline",()=>{if(S.tab==="set")softRender()});
+  document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&fb&&user&&(syncDirty||Date.now()-lastSync>300000))pullAll(true)});
+  setInterval(()=>{if(fb&&user&&syncDirty&&navigator.onLine!==false)pullAll(true)},60000);
+}catch(e){}
 document.addEventListener("click",async ev=>{
   const b=ev.target.closest("[data-act]");if(!b||!fb)return;
   const a=b.dataset.act;
@@ -668,6 +758,12 @@ document.addEventListener("click",async ev=>{
     if(!email||pw.length<6){toast("이메일과 6자 이상 비밀번호를 입력하세요");return}
     try{a==="signin"?await auth.signInWithEmailAndPassword(email,pw):await auth.createUserWithEmailAndPassword(email,pw)}
     catch(e){const c=e.code||"";toast(c==="auth/email-already-in-use"?"이미 가입된 이메일이에요. 로그인을 눌러주세요":/invalid-credential|wrong-password|user-not-found/.test(c)?"이메일 또는 비밀번호가 맞지 않아요":c==="auth/invalid-email"?"이메일 형식을 확인해 주세요":"실패: "+c)}
+  }
+  else if(a==="resetpw"){
+    const email=$("em").value.trim();
+    if(!email){toast("위 칸에 가입한 이메일을 먼저 입력해 주세요");return}
+    try{await auth.sendPasswordResetEmail(email);toast("재설정 메일을 보냈어요. 메일함(스팸함도)을 확인해 주세요")}
+    catch(e){const c=e.code||"";toast(c==="auth/invalid-email"?"이메일 형식을 확인해 주세요":c==="auth/user-not-found"?"가입되지 않은 이메일이에요":"메일을 보내지 못했어요. 잠시 후 다시 시도해 주세요")}
   }
   else if(a==="signout"){await auth.signOut()}
   else if(a==="sync"){pullAll()}
@@ -684,20 +780,127 @@ function exportData(){
     toast("백업 파일을 만들었어요");
   }catch(e){toast("이 화면에서는 내보낼 수 없어요")}
 }
-document.addEventListener("click",ev=>{if(ev.target.closest('[data-act="export"]'))exportData()});
+let CRCT=null;
+function crc32(buf){
+  if(!CRCT){CRCT=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;CRCT[n]=c>>>0}}
+  let c=0xFFFFFFFF;for(let i=0;i<buf.length;i++)c=CRCT[(c^buf[i])&255]^(c>>>8);
+  return (c^0xFFFFFFFF)>>>0;
+}
+async function zipBuild(files){
+  const enc=new TextEncoder(),parts=[],cd=[];let off=0,cds=0;
+  for(const f of files){
+    const buf=new Uint8Array(await f.blob.arrayBuffer()),name=enc.encode(f.name),crc=crc32(buf),sz=buf.length;
+    const lh=new DataView(new ArrayBuffer(30));
+    lh.setUint32(0,0x04034b50,true);lh.setUint16(4,20,true);lh.setUint16(6,0x0800,true);lh.setUint16(12,0x21,true);
+    lh.setUint32(14,crc,true);lh.setUint32(18,sz,true);lh.setUint32(22,sz,true);lh.setUint16(26,name.length,true);
+    parts.push(lh.buffer,name,f.blob);
+    const ch=new DataView(new ArrayBuffer(46));
+    ch.setUint32(0,0x02014b50,true);ch.setUint16(4,20,true);ch.setUint16(6,20,true);ch.setUint16(8,0x0800,true);ch.setUint16(14,0x21,true);
+    ch.setUint32(16,crc,true);ch.setUint32(20,sz,true);ch.setUint32(24,sz,true);ch.setUint16(28,name.length,true);ch.setUint32(42,off,true);
+    cd.push(ch.buffer,name);cds+=46+name.length;
+    off+=30+name.length+sz;
+  }
+  const ed=new DataView(new ArrayBuffer(22));
+  ed.setUint32(0,0x06054b50,true);ed.setUint16(8,files.length,true);ed.setUint16(10,files.length,true);ed.setUint32(12,cds,true);ed.setUint32(16,off,true);
+  return new Blob(parts.concat(cd,[ed.buffer]),{type:"application/zip"});
+}
+async function zipRead(file){
+  const size=file.size,tail=new Uint8Array(await file.slice(Math.max(0,size-66000),size).arrayBuffer());
+  let p=-1;for(let i=tail.length-22;i>=0;i--){if(tail[i]===0x50&&tail[i+1]===0x4b&&tail[i+2]===5&&tail[i+3]===6){p=i;break}}
+  if(p<0)throw 0;
+  const tv=new DataView(tail.buffer),n=tv.getUint16(p+10,true),cdSize=tv.getUint32(p+12,true),cdOff=tv.getUint32(p+16,true);
+  const cd=new DataView(await file.slice(cdOff,cdOff+cdSize).arrayBuffer()),dec=new TextDecoder(),out={};let q=0;
+  for(let i=0;i<n;i++){
+    if(cd.getUint32(q,true)!==0x02014b50)throw 0;
+    const meth=cd.getUint16(q+10,true),csz=cd.getUint32(q+20,true),nl=cd.getUint16(q+28,true),el=cd.getUint16(q+30,true),cl=cd.getUint16(q+32,true),lo=cd.getUint32(q+42,true);
+    const name=dec.decode(new Uint8Array(cd.buffer,q+46,nl));
+    if(meth!==0)throw 0;
+    const lh=new DataView(await file.slice(lo,lo+30).arrayBuffer()),start=lo+30+lh.getUint16(26,true)+lh.getUint16(28,true);
+    out[name]=file.slice(start,start+csz);
+    q+=46+nl+el+cl;
+  }
+  return out;
+}
+function dl(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}
+async function exportZip(){
+  toast("백업 파일을 만드는 중이에요...");
+  try{
+    const files=[],seen={};let pc=0,miss=0;
+    for(const k of Object.keys(DB.entries)){
+      const e=DB.entries[k];
+      for(const id of ((e&&e.photos)||[])){
+        if(seen[id])continue;seen[id]=1;
+        let b=null;try{b=await pGet("o:"+id)}catch(x){}
+        if(b){files.push({name:"photos/"+id+".jpg",blob:b});pc++}else miss++;
+      }
+    }
+    files.unshift({name:"data.json",blob:new Blob([JSON.stringify(DB)],{type:"application/json"})});
+    dl(await zipBuild(files),"mood-diary-"+TODAY+".zip");
+    toast("백업 완료 · 사진 "+pc+"장"+(miss?" (이 기기에 없는 사진 "+miss+"장 제외)":""));
+  }catch(e){toast("백업 파일을 만들지 못했어요")}
+}
+async function importAny(f){
+  let o,z=null;
+  if(/\.zip$/i.test(f.name)){z=await zipRead(f);if(!z["data.json"])throw 0;o=JSON.parse(await z["data.json"].text())}
+  else o=JSON.parse(await f.text());
+  if(!o||typeof o.entries!=="object")throw 0;
+  toast("불러오는 중이에요...");
+  let n=0,pc=0;
+  for(const k of Object.keys(o.entries)){
+    const src=mig(o.entries[k]);if(!src||typeof src!=="object"||src.del)continue;
+    const local=DB.entries[k],isNew=!local;
+    if(!isNew&&!(ent(k)&&!(local.photos&&local.photos.length)))continue;
+    const okIds=[];
+    if(z&&Array.isArray(src.photos)){
+      for(const id of src.photos){
+        const bl=z["photos/"+id+".jpg"];if(!bl)continue;
+        let have=null;try{have=await pGet("o:"+id)}catch(x){}
+        if(!have){const b=new Blob([bl],{type:"image/jpeg"});await pPut("o:"+id,b);const t=await mkThumb(b);if(t)await pPut("t:"+id,t);pc++}
+        okIds.push(id);
+      }
+    }
+    if(isNew){const e=Object.assign({},src);if(okIds.length)e.photos=okIds;else delete e.photos;DB.entries[k]=e;n++}
+    else if(okIds.length)local.photos=okIds;
+  }
+  (o.tags||[]).forEach(t=>{if(!DB.tags.includes(t))DB.tags.push(t)});
+  if(o.nick&&!DB.nick){DB.nick=o.nick;DB.nickU=Date.now()}
+  save();softRender();toast(n+"개 기록, 사진 "+pc+"장을 불러왔어요");
+}
+document.addEventListener("click",ev=>{
+  if(!ev.target.closest)return;
+  if(ev.target.closest('[data-act="export"]'))exportData();
+  else if(ev.target.closest('[data-act="exportzip"]'))exportZip();
+});
 document.addEventListener("change",ev=>{
   if(ev.target.id!=="imp"||!ev.target.files[0])return;
-  const r=new FileReader();
-  r.onload=()=>{try{
-    const o=JSON.parse(r.result);if(!o||typeof o.entries!=="object")throw 0;
-    let n=0;Object.keys(o.entries).forEach(k=>{if(!DB.entries[k]){DB.entries[k]=mig(o.entries[k]);n++}});
-    (o.tags||[]).forEach(t=>{if(!DB.tags.includes(t))DB.tags.push(t)});
-    if(o.nick&&!DB.nick){DB.nick=o.nick;DB.nickU=Date.now()}
-    save();render();toast(n+"개의 기록을 불러왔어요");
-  }catch(e){toast("올바른 백업 파일이 아니에요")}};
-  r.readAsText(ev.target.files[0]);
+  const f=ev.target.files[0];ev.target.value="";
+  importAny(f).catch(()=>toast("올바른 백업 파일이 아니에요"));
 });
+/* 예전 방식(기록 데이터 안에 들어 있던) 사진을 새 사진 저장소로 옮겨요 */
+let migBusy=false;
+async function migratePhotos(){
+  if(migBusy)return;migBusy=true;
+  try{
+    let ch=false;
+    for(const k of Object.keys(DB.entries)){
+      const e=DB.entries[k];
+      if(!e)continue;
+      const urls=[];
+      if(typeof e.photo==="string"&&e.photo.indexOf("data:")===0)urls.push(e.photo);
+      (e.pd||[]).forEach(u=>{if(typeof u==="string"&&u.indexOf("data:")===0)urls.push(u)});
+      if(!urls.length)continue;
+      try{
+        const ids=[];
+        for(const u of urls){const id=uid(),b=d2b(u);await pPut("o:"+id,b);const t=await mkThumb(b);if(t)await pPut("t:"+id,t);ids.push(id)}
+        e.photos=(e.photos||[]).concat(ids);delete e.photo;delete e.pd;ch=true;
+      }catch(x){}
+    }
+    if(ch){save();softRender()}
+  }catch(x){}
+  migBusy=false;
+}
 render();
+migratePhotos();
 </script>
 </body>
 </html>
