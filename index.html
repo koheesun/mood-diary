@@ -216,8 +216,8 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 <div class="lb" id="lb" hidden></div>
 
 <script>
-const L=["행복해요","괜찮아요","보통이에요","힘들어요","화나요"];
-const CH=["행복","괜찮음","보통","힘듦","화남"];
+const L=["행복해요","기분좋아요","보통이에요","힘들어요","화나요"];
+const CH=["행복","좋음","보통","힘듦","화남"];
 const DOW=["일","월","화","수","목","금","토"];
 const BASE=["일상","일","운동","맛있는거"];
 const STATL={m:"이번 달",y:"올해",a:"전체 기간"},THEMEL={system:"시스템 설정",light:"라이트 모드",dark:"다크 모드"};
@@ -259,7 +259,7 @@ function face(i,s){
   const f=[
     // 행복해요: 눈웃음, 활짝 웃는 입, 햇살 포인트
     blush+'<path d="M27 46Q34 36 42 46M58 46Q66 36 73 46" '+st+'/><path d="M35 58Q50 77 65 58Q64 72 50 73Q37 71 35 58Z" fill="var(--eye)"/><g stroke="#FFC94F" stroke-width="5" stroke-linecap="round"><path d="M17 19l-3-7M28 12l-1-8M39 17l4-7"/></g>',
-    // 괜찮아요: 편안하게 감은 눈, 작은 미소, 잎사귀
+    // 기분좋아요: 편안하게 감은 눈, 작은 미소, 잎사귀
     '<path d="M29 49Q36 56 43 49M57 49Q64 56 71 49" '+st+'/><path d="M41 63Q50 69 59 63" '+st+'/><g fill="#70B98D"><path d="M48 23Q35 5 27 13Q28 27 48 27Z"/><path d="M51 23Q58 5 72 12Q70 25 51 27Z"/></g><path d="M50 19v13" stroke="#70B98D" stroke-width="3" stroke-linecap="round"/>',
     // 보통이에요: 무표정, 흐릿한 둥근 구름 장식
     '<g fill="var(--c2)" opacity=".5"><circle cx="28" cy="65" r="15"/><circle cx="39" cy="49" r="19"/><circle cx="61" cy="50" r="18"/><circle cx="75" cy="65" r="14"/></g>'+dot(36,51)+dot(64,51)+'<path d="M42 67H58" '+st+'/>',
