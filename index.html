@@ -486,7 +486,7 @@ function vList(){
 function acctCard(){
   if(!fb)return "";
   const ps='style="margin:0 0 10px;color:var(--sub);font-size:.88rem"';
-  if(user)return '<div class="card"><h3>☁️ 서버 동기화</h3><p '+ps+'>'+esc(user.email)+' 계정에 기록이 자동으로 저장돼요. '+syncStatus()+'</p><div style="display:flex;gap:8px"><button class="chip fill" data-act="sync">지금 동기화</button><button class="chip" data-act="signout">로그아웃</button></div></div>';
+  if(user)return '<div class="card"><h3>☁️ 서버 동기화</h3><p '+ps+'>'+esc(user.email)+' 계정에 기록과 사진이 자동으로 저장돼요. 사진은 서버에 줄인 크기로 보관돼요. '+syncStatus()+'</p><div style="display:flex;gap:8px"><button class="chip fill" data-act="sync">지금 동기화</button><button class="chip" data-act="signout">로그아웃</button></div></div>';
   return '<div class="card"><h3>☁️ 로그인하고 기록 보관하기</h3><p '+ps+'>로그인하면 기록이 서버에 저장되어 휴대폰과 컴퓨터에서 같이 볼 수 있어요.</p><input class="ip" id="em" type="email" autocomplete="email" placeholder="이메일"><input class="ip" id="pw" type="password" autocomplete="current-password" placeholder="비밀번호 (6자 이상)"><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button class="chip fill" data-act="signin">로그인</button><button class="chip" data-act="signup">처음이에요 (가입)</button></div><button class="del" data-act="resetpw">비밀번호를 잊으셨나요?</button></div>';
 }
 function vSet(){
@@ -581,7 +581,7 @@ async function hyd(){
 document.addEventListener("error",ev=>{const t=ev.target;if(t&&t.tagName==="IMG"&&t.closest&&t.closest("#det,#rec,#screen")){t.dataset.miss="1";const m=$("pmiss");if(m)m.hidden=false}},true);
 let hq=0;
 try{new MutationObserver(()=>{if(!hq){hq=1;setTimeout(()=>{hq=0;hyd()},30)}}).observe(document.body,{childList:true,subtree:true})}catch(e){}
-const wire=e=>{if(!e||(!e.photos&&!e.pd))return e;const o=Object.assign({},e);delete o.photos;delete o.pd;o.pn=(e.photos||[]).length+(e.pd||[]).length;return o};
+const wire=e=>{if(!e)return e;const o=Object.assign({},e);delete o.pd;delete o.pn;return o};
 let saving=false;
 async function saveRec(){
   if(saving)return;saving=true;
@@ -601,12 +601,12 @@ async function saveRec(){
     try{for(const p of d.photos){if(p.file)pd.push(await toDataUrl(p.file,1280,.8));else ids.push(p.id)}}
     catch(e){saving=false;toast("사진을 저장하지 못했어요. 다른 사진으로 다시 시도해 주세요");return}
   }
-  d.orig.filter(id=>!ids.includes(id)).forEach(id=>{pDel("o:"+id);pDel("t:"+id)});
+  d.orig.filter(id=>!ids.includes(id)).forEach(id=>{pDel("o:"+id);pDel("t:"+id);rdel(id)});
   const en={m:d.m,n:d.n,tags:d.tags,photos:ids,u:Date.now(),v:2,f:d.f,c:d.c};
   if(pd.length)en.pd=pd;
   DB.entries[d.k]=en;DB.pref={f:d.f,c:d.c};
   if(!save()){toast("저장 공간이 부족해요. 사진을 줄이거나 백업 후 정리해 주세요");saving=false;return}
-  toast(pd.length?"이 브라우저는 사진 저장소를 쓸 수 없어서 사진을 작게 줄여 저장했어요":"저장했어요");pushDay(d.k);
+  toast(pd.length?"이 브라우저는 사진 저장소를 쓸 수 없어서 사진을 작게 줄여 저장했어요":"저장했어요");pushDay(d.k);syncPhotos();
   const pk=parse(d.k);S.sel=d.k;S.y=pk[0];S.m=pk[1]-1;saving=false;closeRec();
 }
 async function openLb(i){
@@ -709,7 +709,7 @@ document.addEventListener("click",ev=>{
   else if(a==="editdet"){const k=S.det;closeDet();openRec(k)}
   else if(a==="deldet"){
     if(!S.arm){S.arm=true;vDet();return}
-    const k=S.det;plist(ent(k)).forEach(p=>{if(p.id){pDel("o:"+p.id);pDel("t:"+p.id)}});DB.entries[k]={del:1,u:Date.now()};save();pushDay(k);closeDet();toast("지웠어요");
+    const k=S.det;plist(ent(k)).forEach(p=>{if(p.id){pDel("o:"+p.id);pDel("t:"+p.id);rdel(p.id)}});DB.entries[k]={del:1,u:Date.now()};save();pushDay(k);closeDet();toast("지웠어요");
   }
   else if(a==="close")closeRec();
   else if(a==="font"){d.f=v;vRec()}
@@ -769,6 +769,43 @@ async function pushDay(k){if(!fb||!user)return;if(navigator.onLine===false)syncD
 async function pushUser(){if(!fb||!user)return;try{await db.collection("users").doc(user.uid).set({nick:DB.nick||"",email:user.email||"",joined:(user.metadata&&user.metadata.creationTime)||"",lastSeen:firebase.firestore.FieldValue.serverTimestamp(),count:Object.keys(DB.entries).filter(ent).length},{merge:true})}catch(e){}}
 async function pushProfile(){if(!fb||!user)return;try{await col().doc("__profile").set({nick:DB.nick||"",u:DB.nickU||0});pushUser()}catch(e){}}
 async function pushTags(){if(!fb||!user)return;try{await col().doc("__tags").set({tags:DB.tags,hid:DB.hid||[],u:DB.tagsU||0})}catch(e){}}
+/* 사진 동기화: 서버에는 줄인 사진(긴 변 1600px, 1MB 이하)을 users/UID/photos/사진ID 로 저장해요 */
+const pcol=()=>db.collection("users").doc(user.uid).collection("photos");
+function rdel(id){try{if(fb&&user){pcol().doc(id).delete().catch(()=>{});if(DB.pdone){delete DB.pdone[id]}}}catch(e){}}
+async function mkSyncUrl(b){
+  let max=1600,q=.8,u=await toDataUrl(b,max,q);
+  for(let i=0;i<8&&u.length>880000;i++){if(q>.55)q-=.1;else max=Math.round(max*.8);u=await toDataUrl(b,max,q)}
+  return u;
+}
+let psync=false;
+async function syncPhotos(){
+  if(!fb||!user||psync)return;
+  try{await idbOpen()}catch(e){return}
+  psync=true;
+  try{
+    DB.pdone=DB.pdone||{};
+    const ids=[];
+    Object.keys(DB.entries).forEach(k=>{if(ent(k))(DB.entries[k].photos||[]).forEach(id=>{if(!ids.includes(id))ids.push(id)})});
+    let got=0;
+    for(const id of ids){
+      const have=await pGet("o:"+id).catch(()=>null);
+      if(have&&!DB.pdone[id]){
+        const u=await mkSyncUrl(have);
+        await pcol().doc(id).set({d:u,u:Date.now()});
+        DB.pdone[id]=1;save();
+      }else if(!have){
+        const snap=await pcol().doc(id).get();
+        if(!snap.exists)continue;
+        const dd=snap.data()&&snap.data().d;
+        if(typeof dd!=="string"||dd.indexOf("data:image/")!==0)continue;
+        const b=d2b(dd);await pPut("o:"+id,b);const t=await mkThumb(b);if(t)await pPut("t:"+id,t);
+        DB.pdone[id]=1;got++;
+      }
+    }
+    if(got){save();softRender();if(S.det&&!$("det").hidden)vDet()}
+  }catch(e){syncDirty=true}
+  psync=false;
+}
 async function pullAll(silent){
   if(!fb||!user)return;
   if(navigator.onLine===false){syncDirty=true;if(S.tab==="set")softRender();return}
@@ -781,11 +818,11 @@ async function pullAll(silent){
     const rp=remote.__profile;
     if(rp&&(rp.u||0)>(DB.nickU||0)){DB.nick=rp.nick||"";DB.nickU=rp.u}
     else if(DB.nickU&&DB.nickU>((rp&&rp.u)||0))up.push(["__profile",{nick:DB.nick||"",u:DB.nickU}]);
-    Object.keys(DB.entries).forEach(k=>{const l=DB.entries[k],r=remote[k];if(!r||(l.u||0)>(r.u||0))up.push([k,wire(l)])});
-    Object.keys(remote).forEach(k=>{if(k.startsWith("__"))return;const l=DB.entries[k],r=remote[k];if(!l||(r.u||0)>(l.u||0)){if(l&&l.photos){if(r.del)l.photos.forEach(id=>{pDel("o:"+id);pDel("t:"+id)});else r.photos=l.photos}delete r.pn;DB.entries[k]=r}});
+    Object.keys(DB.entries).forEach(k=>{const l=DB.entries[k],r=remote[k];if(!r||(l.u||0)>(r.u||0)||(l.photos&&l.photos.length&&!(r.photos&&r.photos.length)&&!r.del))up.push([k,wire(l)])});
+    Object.keys(remote).forEach(k=>{if(k.startsWith("__"))return;const l=DB.entries[k],r=remote[k];if(!l||(r.u||0)>(l.u||0)){if(l&&l.photos&&l.photos.length){if(r.del)l.photos.forEach(id=>{pDel("o:"+id);pDel("t:"+id)});else if(!r.photos)r.photos=l.photos;else l.photos.filter(id=>!r.photos.includes(id)).forEach(id=>{pDel("o:"+id);pDel("t:"+id)})}delete r.pn;DB.entries[k]=r}});
     save();
     for(let i=0;i<up.length;i+=400){const wb=db.batch();up.slice(i,i+400).forEach(([k,x])=>wb.set(col().doc(k),x));await wb.commit()}
-    lastSync=Date.now();syncDirty=false;pushUser();migratePhotos();softRender();if(!silent)toast("동기화했어요");
+    lastSync=Date.now();syncDirty=false;pushUser();migratePhotos().then(syncPhotos);softRender();if(!silent)toast("동기화했어요");
   }catch(e){syncDirty=true;if(!silent)toast("동기화에 실패했어요")}
 }
 if(fb){
