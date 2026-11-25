@@ -10,12 +10,12 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <style>
 :root{
-  --bg:#FFFFFF;--card:#FFFFFF;--ink:#26262E;--sub:#8E8E99;--line:#ECECEF;--soft:#F5F5F7;--pri:#7C6CE2;
-  --c0:#FFC94F;--c1:#9DDBB8;--c2:#DCD8E8;--c3:#91AEEB;--c4:#FF8D9E;--eye:#3E3A4F;--sh:0 2px 14px rgba(0,0,0,.06);
+  --bg:#FFFFFF;--card:#FFFFFF;--ink:#26262E;--sub:#8E8E99;--line:#ECECEF;--soft:#F5F5F7;--pri:#2F9BE6;
+  --c0:#FFC94F;--c1:#9DDBB8;--c2:#D9DFE8;--c3:#91AEEB;--c4:#FF8D9E;--eye:#3E3A4F;--sh:0 2px 14px rgba(0,0,0,.06);
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121214;--card:#1C1C20;--ink:#F2F2F5;--sub:#9A9AA6;--line:#2C2C32;--soft:#2A2A30;--pri:#9C8FF0;--sh:0 2px 14px rgba(0,0,0,.35)}}
-:root[data-theme="dark"]{--bg:#121214;--card:#1C1C20;--ink:#F2F2F5;--sub:#9A9AA6;--line:#2C2C32;--soft:#2A2A30;--pri:#9C8FF0;--sh:0 2px 14px rgba(0,0,0,.35)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121214;--card:#1C1C20;--ink:#F2F2F5;--sub:#9A9AA6;--line:#2C2C32;--soft:#2A2A30;--pri:#5DB8F7;--sh:0 2px 14px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#121214;--card:#1C1C20;--ink:#F2F2F5;--sub:#9A9AA6;--line:#2C2C32;--soft:#2A2A30;--pri:#5DB8F7;--sh:0 2px 14px rgba(0,0,0,.35)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.5}
@@ -26,7 +26,7 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .screen{padding:18px 18px 130px}
 .hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
 .hd h1{font-size:1.6rem;line-height:1.35;margin:0;font-weight:700}
-.nick{background:linear-gradient(135deg,#FF7A9A,#7C6CE2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.nick{background:linear-gradient(135deg,#6AD0FF,#2F9BE6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 .ic{width:42px;height:42px;display:grid;place-items:center;border-radius:50%}
 .ttl{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;text-align:center;margin-bottom:12px}
 .ttl h1{font-size:1.15rem;margin:0;font-weight:700}
@@ -126,7 +126,7 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .hero{width:100%;height:250px;object-fit:cover;display:block}
 .ov.dt>div{padding:0 0 24px;max-width:440px}
 .dbar{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));left:12px;right:12px;display:flex;justify-content:space-between;z-index:2}
-.dbar button{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.85);color:#27243C;display:grid;place-items:center}
+.dbar button{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.85);color:#26262E;display:grid;place-items:center}
 .ov.dt>div:has(.hs) .dbar button{background-color: rgba(255,255,255,.9);}
 .menu{position:absolute;top:56px;right:12px;background:var(--card);border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.2);padding:6px;z-index:3;min-width:150px}
 .menu button{display:block;width:100%;padding:10px 12px;border-radius:10px}
@@ -163,10 +163,10 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .pgr .it img{width:100%;height:100%;object-fit:cover;display:block}
 .pgr .x{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;font-size:1rem;line-height:1}
 .pgr .add{aspect-ratio:1;border:2px dashed #D6D6DC;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--sub);background:var(--soft);cursor:pointer;text-align:center;font-size:.8rem}
-.lb{position:fixed;inset:0;z-index:30;background:rgba(10,8,20,.94);overflow:hidden}
+.lb{position:fixed;inset:0;z-index:30;background:rgba(10,12,18,.94);overflow:hidden}
 .lbi{position:absolute;inset:0;display:grid;place-items:center}
 .lbi img{display:block;width:100%;height:100%;object-fit:contain}
-.lbx{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:31;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.9);color:#27243C;font-size:1.1rem;text-align:center}
+.lbx{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:31;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.9);color:#26262E;font-size:1.1rem;text-align:center}
 .lbn{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:31;background:rgba(0,0,0,.6);color:#fff;font-size:.78rem;padding:4px 14px;border-radius:14px;white-space:nowrap}
 @media (hover:hover){.chips{scrollbar-width:thin;cursor:grab}.chips.drag{cursor:grabbing;user-select:none}}
 .chips .chip{flex:none}
@@ -264,7 +264,7 @@ function face(i,s){
     // 보통이에요: 무표정, 흐릿한 둥근 구름 장식
     '<g fill="var(--c2)" opacity=".5"><circle cx="28" cy="65" r="15"/><circle cx="39" cy="49" r="19"/><circle cx="61" cy="50" r="18"/><circle cx="75" cy="65" r="14"/></g>'+dot(36,51)+dot(64,51)+'<path d="M42 67H58" '+st+'/>',
     // 힘들어요: 구름 캐릭터, 처진 눈썹/입, 어지러운 스파이럴
-    cloud+'<path d="M31 49Q37 45 43 48M57 48Q63 45 69 49" '+st+' stroke-width="3.8"/><path d="M35 54Q39 59 43 54M57 54Q61 59 65 54" '+st+' stroke-width="3.5"/><path d="M40 72Q50 64 60 72" '+st+'/><g fill="#E7E2FF" stroke="#9181D7" stroke-width="2.5"><path d="M73 17c12-7 18 2 10 8-8 6-15-1-10-5 4-3 9 1 6 4" fill="none" stroke-linecap="round"/></g>'+blush,
+    cloud+'<path d="M31 49Q37 45 43 48M57 48Q63 45 69 49" '+st+' stroke-width="3.8"/><path d="M35 54Q39 59 43 54M57 54Q61 59 65 54" '+st+' stroke-width="3.5"/><path d="M40 72Q50 64 60 72" '+st+'/><g fill="#E3F1FF" stroke="#4F93D8" stroke-width="2.5"><path d="M73 17c12-7 18 2 10 8-8 6-15-1-10-5 4-3 9 1 6 4" fill="none" stroke-linecap="round"/></g>'+blush,
     // 화나요: 찡그린 눈썹, 화난 입, 분노 표시
     blush+'<path d="M28 42L42 49M58 49L72 42" '+st+' stroke-width="5.5"/><path d="M35 54Q39 58 43 54M57 54Q61 58 65 54" '+st+'/><path d="M39 72Q50 60 61 72" '+st+'/><g stroke="#E94F61" stroke-width="5" stroke-linecap="round"><path d="M79 19l8-7M82 28l11 1M75 10l1-8"/></g>'
   ][i];
@@ -302,7 +302,6 @@ const HOLIDAYS={
   "2026-10-05":1,
   "2026-10-09":1,
   "2026-12-25":1,
-
   "2027-01-01":1,
   "2027-02-06":1,
   "2027-02-07":1,
@@ -361,7 +360,7 @@ function trendD(pts,k){
 function trend(ks,fresh,mode){
   const pts=trendPts(ks);if(pts.length<2)return "";
   const d=trendD(pts,fresh?0:1);
-  return '<svg class="tr" data-m="'+mode+'" data-p="'+pts.join(",")+'" viewBox="0 0 150 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7C6CE2" stop-opacity=".3"/><stop offset="1" stop-color="#7C6CE2" stop-opacity="0"/></linearGradient></defs><path class="ta" d="'+d.area+'" fill="url(#ar)"/><path class="tl" d="'+d.line+'" fill="none" stroke="#7C6CE2" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
+  return '<svg class="tr" data-m="'+mode+'" data-p="'+pts.join(",")+'" viewBox="0 0 150 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F9BE6" stop-opacity=".3"/><stop offset="1" stop-color="#2F9BE6" stop-opacity="0"/></linearGradient></defs><path class="ta" d="'+d.area+'" fill="url(#ar)"/><path class="tl" d="'+d.line+'" fill="none" stroke="#2F9BE6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
 }
 const played={};
 function playPanel(mode){
@@ -525,41 +524,42 @@ function idbOpen(){return idb||(idb=new Promise((res,rej)=>{const r=indexedDB.op
 async function pPut(k,v){const d=await idbOpen();return new Promise((res,rej)=>{const t=d.transaction("p","readwrite");t.objectStore("p").put(v,k);t.oncomplete=res;t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)})}
 async function pGet(k){const d=await idbOpen();return new Promise((res,rej)=>{const r=d.transaction("p").objectStore("p").get(k);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
 const URLS={};
-async function pDel(k){try{const d=await idbOpen();if(URLS[k]){URL.revokeObjectURL(URLS[k]);delete URLS[k]}return new Promise(res=>{const t=d.transaction("p","readwrite");t.objectStore("p").delete(k);t.oncomplete=res;t.onerror=res})}catch(e){}}
-async function pUrl(k){if(URLS[k])return URLS[k];try{const b=await pGet(k);if(!b)return "";return URLS[k]=URL.createObjectURL(b)}catch(e){return ""}}
+const b2u=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(r.error);r.readAsDataURL(b)});
+async function pDel(k){try{const d=await idbOpen();delete URLS[k];return new Promise(res=>{const t=d.transaction("p","readwrite");t.objectStore("p").delete(k);t.oncomplete=res;t.onerror=res})}catch(e){}}
+async function pUrl(k){if(URLS[k])return URLS[k];try{const b=await pGet(k);if(!b)return "";const u=await b2u(b);if(k[0]==="t")URLS[k]=u;return u}catch(e){return ""}}
 const plist=e=>e?(e.photos||[]).map(id=>({id:id})).concat((e.pd||[]).map(u=>({l:u}))).concat(e.photo?[{l:e.photo}]:[]):[];
 const pimg=(p,kind,cls,alt)=>p.l?'<img'+(cls?' class="'+cls+'"':"")+' src="'+p.l+'" alt="'+alt+'">':'<img'+(cls?' class="'+cls+'"':"")+' data-p="'+kind+':'+p.id+'" alt="'+alt+'">';
 function d2b(u){const a=u.split(","),m=/:(.*?);/.exec(a[0])[1],bin=atob(a[1]),x=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)x[i]=bin.charCodeAt(i);return new Blob([x],{type:m})}
 async function mkThumb(f){
   try{
-    const u=URL.createObjectURL(f);
+    const u=await b2u(f);
     const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=u});
     const sc=Math.min(1,320/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement("canvas");
     c.width=Math.max(1,Math.round(im.naturalWidth*sc));c.height=Math.max(1,Math.round(im.naturalHeight*sc));
-    c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+    c.getContext("2d").drawImage(im,0,0,c.width,c.height);
     return await new Promise(r=>c.toBlob(r,"image/jpeg",.8));
   }catch(e){return null}
 }
 async function mkOpt(f,strict){
   const mem=async()=>new Blob([await f.arrayBuffer()],{type:f.type||"image/jpeg"});
   try{
-    const u=URL.createObjectURL(f);
+    const u=await b2u(f);
     const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=u});
     const m0=Math.max(im.naturalWidth,im.naturalHeight);
-    if(m0<=2560&&f.size<=1500000){URL.revokeObjectURL(u);return strict?await mem():f}
+    if(m0<=2560&&f.size<=1500000){return strict?await mem():f}
     const sc=Math.min(1,2560/m0),c=document.createElement("canvas");
     c.width=Math.max(1,Math.round(im.naturalWidth*sc));c.height=Math.max(1,Math.round(im.naturalHeight*sc));
-    const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+    const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
     const b=await new Promise(r=>c.toBlob(r,"image/jpeg",.88));
     return b&&b.size<f.size?b:(strict?await mem():f);
   }catch(e){if(strict)throw e;return f}
 }
 async function toDataUrl(f,max,q){
-  const u=URL.createObjectURL(f);
+  const u=await b2u(f);
   const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=u});
   const sc=Math.min(1,max/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement("canvas");
   c.width=Math.max(1,Math.round(im.naturalWidth*sc));c.height=Math.max(1,Math.round(im.naturalHeight*sc));
-  const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+  const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
   return c.toDataURL("image/jpeg",q);
 }
 const isHeic=f=>/heic|heif/i.test(f.type||"")||/\.(heic|heif)$/i.test(f.name||"");
@@ -580,7 +580,7 @@ async function hyd(){
 }
 document.addEventListener("error",ev=>{const t=ev.target;if(t&&t.tagName==="IMG"&&t.closest&&t.closest("#det,#rec,#screen")){t.dataset.miss="1";const m=$("pmiss");if(m)m.hidden=false}},true);
 let hq=0;
-try{new MutationObserver(()=>{if(!hq){hq=1;requestAnimationFrame(()=>{hq=0;hyd()})}}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+try{new MutationObserver(()=>{if(!hq){hq=1;setTimeout(()=>{hq=0;hyd()},30)}}).observe(document.body,{childList:true,subtree:true})}catch(e){}
 const wire=e=>{if(!e||(!e.photos&&!e.pd))return e;const o=Object.assign({},e);delete o.photos;delete o.pd;o.pn=(e.photos||[]).length+(e.pd||[]).length;return o};
 let saving=false;
 async function saveRec(){
@@ -670,7 +670,7 @@ function vRec(){
 function openRec(k){
   const e=ent(k);
   S.draft={k:k,m:e?e.m:0,n:(e&&e.n)||"",tags:((e&&e.tags)||[]).slice(),photos:[],orig:((e&&e.photos)||[]).slice(),f:e?(e.f||"gaegu"):((DB.pref&&DB.pref.f)||"gaegu"),c:e?okc(e.c):okc(DB.pref&&DB.pref.c)};
-  if(e){(e.photos||[]).forEach(id=>S.draft.photos.push({id:id}));if(e.photo){try{const bl=d2b(e.photo);S.draft.photos.push({id:uid(),file:bl,url:URL.createObjectURL(bl)})}catch(x){}}(e.pd||[]).forEach(u=>{try{const bl=d2b(u);S.draft.photos.push({id:uid(),file:bl,url:URL.createObjectURL(bl)})}catch(x){}})}
+  if(e){(e.photos||[]).forEach(id=>S.draft.photos.push({id:id}));if(e.photo){try{const bl=d2b(e.photo);S.draft.photos.push({id:uid(),file:bl,url:e.photo})}catch(x){}}(e.pd||[]).forEach(u=>{try{const bl=d2b(u);S.draft.photos.push({id:uid(),file:bl,url:u})}catch(x){}})}
   S.adding=false;$("rec").hidden=false;document.body.style.overflow="hidden";vRec();
 }
 function closeRec(){$("rec").hidden=true;document.body.style.overflow="";S.draft=null;render()}
@@ -745,7 +745,7 @@ document.addEventListener("change",async ev=>{
       try{blob=await mkOpt(f,true)}
       catch(x){if(isHeic(f))blob=await mkOpt(await heicToJpeg(f),true);else throw x}
       if(!S.draft)return;
-      S.draft.photos.push({id:uid(),file:blob,url:URL.createObjectURL(blob)});
+      const th=await mkThumb(blob);S.draft.photos.push({id:uid(),file:blob,url:await b2u(th||blob)});
     }catch(x){bad++}
   }
   if(!S.draft)return;
