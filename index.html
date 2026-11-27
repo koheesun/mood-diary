@@ -207,6 +207,16 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 .cw.on{outline:2px solid var(--ink);outline-offset:2px}
 .cw.cust{background:conic-gradient(#f44,#fc4,#4d4,#4cf,#44f,#f4c,#f44);border:0}
 .cw.cust input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0}
+
+.nt{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:24px;animation:fin .2s ease-out}
+.nt[hidden]{display:none}
+.ntb{width:100%;max-width:340px;background:var(--card);color:var(--ink);border-radius:28px;box-shadow:0 12px 40px rgba(0,0,0,.3);overflow:hidden;text-align:center}
+.ntb .em{font-size:2.4rem;padding-top:24px}
+.ntb .tx{padding:10px 24px 22px;font-family:"Gaegu","Noto Sans KR",cursive;font-size:1.3rem;line-height:1.55}
+.ntb .sg{display:block;margin-top:10px;color:var(--sub);font-size:1.1rem}
+.ntb .bt{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.ntb .bt button{padding:15px 0;text-align:center;font-weight:500;color:var(--sub)}
+.ntb .bt button+button{border-left:1px solid var(--line);color:var(--pri);font-weight:700}
 </style>
 </head>
 <body>
@@ -215,6 +225,21 @@ textarea{width:100%;min-height:92px;resize:none;border:0;border-radius:18px;back
 <div class="ov" id="rec" hidden></div>
 <div class="ov dt" id="det" hidden></div>
 <div class="lb" id="lb" hidden></div>
+
+<div class="nt" id="nt" hidden role="dialog" aria-modal="true" aria-label="공지">
+  <div class="ntb">
+    <div class="em">🍀</div>
+    <div class="tx">
+      오늘 드디어 금요일이에욥<br>이게 꿈은 아니겠죠??<br>
+      다들 화이팅팅팅!!!🤍🍀
+      <span class="sg">-쥔장 고로케맘-</span>
+    </div>
+    <div class="bt">
+      <button id="ntHide">오늘 하루 안보기</button>
+      <button id="ntClose">닫기</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const L=["행복해요","기분좋아요","보통이에요","힘들어요","화나요"];
@@ -511,6 +536,21 @@ function vSub(){
   if(v==="theme"){const c=DB.theme||"system";return hd("테마 설정")+'<div class="card rows">'+opt("settheme","system","시스템 설정",c)+opt("settheme","light","라이트 모드",c)+opt("settheme","dark","다크 모드",c)+'</div>'}
   return hd("앱 정보")+'<div class="card"><h3>오늘의 기분</h3><p '+ps+'>매일의 기분을 얼굴로 남기는 개인 다이어리예요.<br>기록 '+total+'일 · 로그인하면 서버에도 저장돼요.</p></div>';
 }
+
+/* 팝업 공지: from~to 날짜에만 표시 (YYYY-MM-DD) */
+const NOTICE={from:"2026-11-27",to:"2026-11-27",key:"mood-notice-hide"};
+function showNotice(){
+  let h="";try{h=localStorage.getItem(NOTICE.key)||""}catch(e){}
+  if(TODAY<NOTICE.from||TODAY>NOTICE.to||h===TODAY)return;
+  $("nt").hidden=false;
+}
+$("ntClose").addEventListener("click",()=>{$("nt").hidden=true});
+$("ntHide").addEventListener("click",()=>{
+  try{localStorage.setItem(NOTICE.key,TODAY)}catch(e){}
+  $("nt").hidden=true;
+});
+$("nt").addEventListener("click",ev=>{if(ev.target.id==="nt")$("nt").hidden=true});
+showNotice();
 
 function render(){
   $("screen").innerHTML=S.tab==="cal"?vCal():S.tab==="stat"?vStat():S.tab==="list"?vList():vSet();
